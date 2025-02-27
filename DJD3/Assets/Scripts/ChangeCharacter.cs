@@ -4,10 +4,12 @@ public class ChangeCharacter : MonoBehaviour
 {
     private GameObject targetCharacter;
     private GameObject currentCharacter;
+    private GameObject previousCharacter;
     private bool canControl = false;
 
     void Start()
     {
+        targetCharacter = null;
         currentCharacter = gameObject; // Start with the initial character
     }
 
@@ -30,11 +32,10 @@ public class ChangeCharacter : MonoBehaviour
 
         DisableAllCharacters(); // Disable all movement, cameras, and scripts
         SetActiveCharacter(targetCharacter); // Activate only the new character
-
-        // Update current character
+        Destroy(gameObject);
         currentCharacter = targetCharacter;
-        targetCharacter = null;
-        canControl = false;
+        targetCharacter = previousCharacter;
+        currentCharacter = gameObject;
     }
 
     private void DisableAllCharacters()
@@ -107,6 +108,15 @@ public class ChangeCharacter : MonoBehaviour
             Debug.Log($"Entered trigger of {target.name}");
             targetCharacter = target.gameObject;
             canControl = true;
+        }
+    }
+    private void OnTriggerExit(Collider target)
+    {
+        if (target.CompareTag("Controllable") && target.gameObject != currentCharacter)
+        {
+            Debug.Log($"Exited trigger of {target.name}");
+            targetCharacter = null;
+            canControl = false;
         }
     }
 }
