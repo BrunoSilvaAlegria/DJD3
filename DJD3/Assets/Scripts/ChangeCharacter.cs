@@ -2,69 +2,111 @@ using UnityEngine;
 
 public class ChangeCharacter : MonoBehaviour
 {
-    
-    [SerializeField]
-    private Camera mainCamera;
     private GameObject targetCharacter;
-    private GameObject currentChild;
-    private Vector3 currentCameraPosition;
-    private Quaternion currentCameraRotation;
-    private bool canControll = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private GameObject currentCharacter;
+    private bool canControl = false;
+
     void Start()
     {
-        
+        currentCharacter = gameObject; // Start with the initial character
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("c") && canControll == true)
+        if (Input.GetKeyDown("c") && canControl)
         {
             Debug.Log("C pressed");
             ChangeController();
-            canControll = false;
         }
     }
-    private void FindChildWithTag(GameObject parent, string tag)
+
+    private void ChangeController()
     {
-        foreach (Transform transform in parent.transform)
+        if (targetCharacter == null)
         {
-            if (transform.CompareTag(tag))
+            Debug.LogWarning("No target character selected.");
+            return;
+        }
+
+        DisableAllCharacters(); // Disable all movement, cameras, and scripts
+        SetActiveCharacter(targetCharacter); // Activate only the new character
+
+        // Update current character
+        currentCharacter = targetCharacter;
+        targetCharacter = null;
+        canControl = false;
+    }
+
+    private void DisableAllCharacters()
+    {
+        GameObject[] allCharacters = GameObject.FindGameObjectsWithTag("Controllable");
+        foreach (GameObject character in allCharacters)
+        {
+            // Disable movement
+            PlayerMovement movement = character.GetComponent<PlayerMovement>();
+            if (movement != null)
             {
-                currentChild = transform.gameObject;
-                Debug.Log($"Current child name = {currentChild.name}");
+                movement.enabled = false;
+            }
+
+            // Disable camera
+            Camera cam = GetCameraFromCharacter(character);
+            if (cam != null)
+            {
+                cam.gameObject.SetActive(false);
+            }
+
+            // Disable this script
+            ChangeCharacter script = character.GetComponent<ChangeCharacter>();
+            if (script != null)
+            {
+                script.enabled = false;
             }
         }
     }
 
-    private void ChangeCameraPosition()
+    private void SetActiveCharacter(GameObject character)
     {
-        
-        currentCameraPosition = mainCamera.transform.position;
-        currentCameraRotation = mainCamera.transform.rotation;
+        if (character != null)
+        {
+            // Enable movement
+            PlayerMovement movement = character.GetComponent<PlayerMovement>();
+            if (movement != null)
+            {
+                movement.enabled = true;
+            }
 
-        FindChildWithTag(targetCharacter, "CamPos");
-        mainCamera.transform.position = currentChild.transform.position;
-        mainCamera.transform.rotation = currentChild.transform.rotation;
-        Debug.Log("Camera moved to target position");
+            // Enable camera
+            Camera cam = GetCameraFromCharacter(character);
+            if (cam != null)
+            {
+                cam.gameObject.SetActive(true);
+            }
+
+            // Enable this script on the new character
+            ChangeCharacter script = character.GetComponent<ChangeCharacter>();
+            if (script != null)
+            {
+                script.enabled = true;
+            }
+
+            Debug.Log($"{character.name} is now the active character.");
+        }
     }
-    private void ChangeController()
+
+    private Camera GetCameraFromCharacter(GameObject character)
     {
-        ChangeCameraPosition();
-        Debug.Log("Controller Changed");
+        if (character == null) return null;
+        return character.GetComponentInChildren<Camera>(true); // Find even disabled cameras
     }
 
     private void OnTriggerEnter(Collider target)
     {
-        Debug.Log("Trigger Entered");
-        if (target.CompareTag("Controllable"))
+        if (target.CompareTag("Controllable") && target.gameObject != currentCharacter)
         {
-            Debug.Log("Controllable found");
+            Debug.Log($"Entered trigger of {target.name}");
             targetCharacter = target.gameObject;
-            Debug.Log($"target name = {targetCharacter.name}");
-            canControll = true;    
+            canControl = true;
         }
-            
     }
 }
