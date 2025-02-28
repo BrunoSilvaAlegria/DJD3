@@ -8,22 +8,22 @@ public class TerrainDetector : MonoBehaviour
 
     [SerializeField] float _castDistance;
     [SerializeField] LayerMask _terrainLayer;
-    int _numberOfHits = 0;
     [SerializeField] float _castHeight = 3;
-
+    [SerializeField] float _sphereRadius = 0.5f;
 
     public Vector3 GetHitPoint()
     {
         RaycastHit hit;
-        Ray ray = new Ray(transform.position + (transform.up * _castHeight), -transform.up);
-        Physics.Raycast(ray, out hit, _castDistance + _castHeight,_terrainLayer);
-        if (hit.collider != null)
+        Vector3 startPos = transform.position + (transform.up * _castHeight);
+        Ray ray = new Ray(startPos, -transform.up);
+        
+        if (Physics.SphereCast(ray, _sphereRadius, out hit, _castDistance + _castHeight, _terrainLayer))
         {
             _hitpos = hit.point;
         }
         else
         {
-            _hitpos = transform.position + (transform.up * _castHeight);
+            _hitpos = startPos;
         }
 
         return _hitpos;
