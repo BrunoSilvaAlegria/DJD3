@@ -12,7 +12,7 @@ public class Fingers : MonoBehaviour
     [SerializeField] float _liftHeight = 0.3f;
     [SerializeField] float _minDistanceTolerance = 0.05f;
     [SerializeField] Fingers _pairedFinger; // The finger that moves opposite to this one
-
+    TerrainDetector _terrainDetector;
     Vector3 _targetPosition;
     bool _isGrounded = true;
 
@@ -28,6 +28,7 @@ public class Fingers : MonoBehaviour
 
     void Start()
     {
+        _terrainDetector = _placementTarget.GetComponent<TerrainDetector>();
         _targetPosition = _placementTarget.position; // Set initial position
     }
 
@@ -42,7 +43,7 @@ public class Fingers : MonoBehaviour
 
         if (_currentPhase == StepPhases.LIFTING && ReachedTargetPosition())
         {
-            _targetPosition = _placementTarget.position;
+            _targetPosition = _terrainDetector.GetHitPoint();
             _currentPhase = StepPhases.MOVING;
         }
 
