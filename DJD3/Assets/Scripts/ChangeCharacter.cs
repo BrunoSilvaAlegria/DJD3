@@ -32,7 +32,7 @@ public class ChangeCharacter : MonoBehaviour
 
         DisableAllCharacters(); // Disable all movement, cameras, and scripts
         SetActiveCharacter(targetCharacter); // Activate only the new character
-        Destroy(gameObject);
+        //Destroy(gameObject);
         currentCharacter = targetCharacter;
         targetCharacter = previousCharacter;
         currentCharacter = gameObject;
