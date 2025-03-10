@@ -1220,7 +1220,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 77302b21a51490742840eaf60d2ae422, type: 2}
+  - {fileID: 2100000, guid: 88be9e452e515644eb356ed1f24a0ff0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1952,7 +1952,7 @@ GameObject:
   - component: {fileID: 2141368265}
   - component: {fileID: 2141368269}
   m_Layer: 0
-  m_Name: TestBot (1)
+  m_Name: Heavy
   m_TagString: Controllable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1993,10 +1993,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gravityAcceleration: -30
   _maxFallSpeed: 30
-  _maxForwardSpeed: 6
-  _maxBackwardSpeed: 5
-  _maxStrafeSpeed: 6
-  _jumpSpeed: 10
+  _maxForwardSpeed: 3
+  _maxBackwardSpeed: 2
+  _maxStrafeSpeed: 3
+  _jumpSpeed: 0
 --- !u!143 &2141368267
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2031,8 +2031,8 @@ Transform:
   m_GameObject: {fileID: 2141368263}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.37, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 8.37, y: 1.64, z: 0}
+  m_LocalScale: {x: 1.6963203, y: 1.6963203, z: 1.6963203}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1569266582}
@@ -2306,7 +2306,7 @@ MonoBehaviour:
   _maxForwardSpeed: 6
   _maxBackwardSpeed: 5
   _maxStrafeSpeed: 6
-  _jumpSpeed: 10
+  _jumpSpeed: 15
 --- !u!1 &2185394817378148383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,7 +2321,7 @@ GameObject:
   - component: {fileID: 7300629269180766126}
   - component: {fileID: 7300629269180766127}
   m_Layer: 0
-  m_Name: TestBot
+  m_Name: Default
   m_TagString: Controllable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
