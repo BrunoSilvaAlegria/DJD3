@@ -381,6 +381,67 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1001 &744701936
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.44483
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.392848
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5971810702758352066, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044653046116332223, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_Name
+      value: DefaultRobot 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9146969224911103723, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 610913f8e5a46654baf93da440185a75, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +491,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1981258635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 758186860971286334, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+  m_PrefabInstance: {fileID: 2033310974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2008719726
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +612,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 299430955484713286, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: heightOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 758186860971286334, guid: 610913f8e5a46654baf93da440185a75, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -594,6 +664,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7158150806119193150, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: cameraToDisable
+      value: 
+      objectReference: {fileID: 1981258635}
     - target: {fileID: 8044653046116332223, guid: 610913f8e5a46654baf93da440185a75, type: 3}
       propertyPath: m_Name
       value: DefaultRobot 1
@@ -721,3 +795,4 @@ SceneRoots:
   - {fileID: 302634833}
   - {fileID: 5381141}
   - {fileID: 2033310974}
+  - {fileID: 744701936}

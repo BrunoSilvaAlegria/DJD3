@@ -6,6 +6,7 @@ public class ChangeCharacter : MonoBehaviour
     private GameObject currentCharacter;
     private GameObject previousCharacter;
     private bool canControl = false;
+    public GameObject objectToDisable;
 
     void Start()
     {
@@ -29,7 +30,7 @@ public class ChangeCharacter : MonoBehaviour
             Debug.LogWarning("No target character selected.");
             return;
         }
-
+        objectToDisable.SetActive(false);
         DisableAllCharacters(); // Disable all movement, cameras, and scripts
         SetActiveCharacter(targetCharacter); // Activate only the new character
         //Destroy(gameObject);
