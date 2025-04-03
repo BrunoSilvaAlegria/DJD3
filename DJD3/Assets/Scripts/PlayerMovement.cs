@@ -1,12 +1,12 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private GameObject targetObject; // Assign the object to be controlled
     [SerializeField] private float _gravityAcceleration;
     [SerializeField] private float _maxFallSpeed;
     [SerializeField] private float _maxForwardSpeed;
-    [SerializeField] private float _maxBackwardSpeed;    
+    [SerializeField] private float _maxBackwardSpeed;
     [SerializeField] private float _maxStrafeSpeed;
     [SerializeField] private float _jumpSpeed;
 
@@ -14,15 +14,29 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 _velocityHor;
     private Vector3 _velocityVer;
     private Vector3 _motion;
-    private bool    _jump;
+    private bool _jump;
 
     void Start()
     {
-        _controller     = GetComponent<CharacterController>();
-        _velocityHor    = Vector3.zero;
-        _velocityVer    = Vector3.zero;
-        _motion         = Vector3.zero;
-        _jump           = false;
+        if (targetObject == null)
+        {
+            Debug.LogError("Target Object not assigned!");
+            enabled = false;
+            return;
+        }
+
+        _controller = targetObject.GetComponent<CharacterController>();
+        if (_controller == null)
+        {
+            Debug.LogError("Target Object does not have a CharacterController!");
+            enabled = false;
+            return;
+        }
+
+        _velocityHor = Vector3.zero;
+        _velocityVer = Vector3.zero;
+        _motion = Vector3.zero;
+        _jump = false;
 
         HideCursor();
     }
@@ -41,8 +55,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateRotation()
     {
         float rotation = Input.GetAxis("Mouse X");
-
-        transform.Rotate(0f, rotation, 0f);
+        targetObject.transform.Rotate(0f, rotation, 0f);
     }
 
     private void CheckForJump()
@@ -60,27 +73,27 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateVelocityHor()
     {
-        float forwardAxis   = Input.GetAxis("Forward");
-        float strafeAxis    = Input.GetAxis("Strafe");
+        float forwardAxis = Input.GetAxis("Forward");
+        float strafeAxis = Input.GetAxis("Strafe");
 
         _velocityHor.x = strafeAxis * _maxStrafeSpeed;
 
         if (forwardAxis > 0f)
         {
             _velocityHor.z = forwardAxis * _maxForwardSpeed;
-
             if (_velocityHor.magnitude > _maxForwardSpeed)
                 _velocityHor = _velocityHor.normalized * _maxForwardSpeed;
         }
         else if (forwardAxis < 0f)
         {
             _velocityHor.z = forwardAxis * _maxBackwardSpeed;
-
             if (_velocityHor.magnitude > _maxBackwardSpeed)
                 _velocityHor = _velocityHor.normalized * _maxBackwardSpeed;
         }
         else
+        {
             _velocityHor.z = 0f;
+        }
     }
 
     private void UpdateVelocityVer()
@@ -91,7 +104,9 @@ public class PlayerMovement : MonoBehaviour
             _jump = false;
         }
         else if (_controller.isGrounded)
+        {
             _velocityVer.y = -0.1f;
+        }
         else if (_velocityVer.y > -_maxFallSpeed)
         {
             _velocityVer.y += _gravityAcceleration * Time.fixedDeltaTime;
@@ -102,8 +117,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdatePosition()
     {
         _motion = (_velocityHor + _velocityVer) * Time.fixedDeltaTime;
-        _motion = transform.TransformVector(_motion);
-
+        _motion = targetObject.transform.TransformVector(_motion);
         _controller.Move(_motion);
     }
 }

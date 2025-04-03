@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6283819332465553734
 Transform:
   m_ObjectHideFlags: 0
@@ -521,13 +521,12 @@ MonoBehaviour:
   animator: {fileID: 313283644625931817}
   punchCooldown: 0.7
   isAttacking: 0
-  raycastOrigin: {fileID: 6228695212652306899}
-  raycastDistance: 100
-  hitEffectPrefab: {fileID: 8044653046116332223}
-  playerMovement: {fileID: 3140009566058629169}
+  projectilePrefab: {fileID: 984442484875237259, guid: f0b529942ef881c42bcb487885008cb3, type: 3}
+  shootPoint: {fileID: 6228695212652306899}
+  projectileSpeed: 30
+  playerMovement: {fileID: 424244900239838802}
   characterSwitch: {fileID: 4231600544271389813}
-  objectToDisable: {fileID: 9146969224911103723}
-  cameraToDisable: {fileID: 758186860971286334}
+  objectToDestroy: {fileID: 9146969224911103723}
 --- !u!1 &3000446064994351990
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +586,7 @@ Transform:
   m_GameObject: {fileID: 6073143360939272143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.65}
+  m_LocalPosition: {x: 0, y: 0, z: 2.751}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -711,7 +710,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5971810702758352066}
   - component: {fileID: 8066423007895772514}
-  - component: {fileID: 3140009566058629169}
   - component: {fileID: 3156865325269958922}
   - component: {fileID: 4231600544271389813}
   m_Layer: 8
@@ -763,24 +761,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3140009566058629169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8044653046116332223}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aae3ce94c484bcc48be393d4ce8099a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gravityAcceleration: -30
-  _maxFallSpeed: 30
-  _maxForwardSpeed: 6
-  _maxBackwardSpeed: 5
-  _maxStrafeSpeed: 6
-  _jumpSpeed: 15
 --- !u!65 &3156865325269958922
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -826,8 +806,9 @@ GameObject:
   - component: {fileID: 5316032788537202985}
   - component: {fileID: 3942679363679719223}
   - component: {fileID: 6761736409992043116}
+  - component: {fileID: 424244900239838802}
   m_Layer: 8
-  m_Name: Combat
+  m_Name: Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -887,3 +868,22 @@ MonoBehaviour:
   animator: {fileID: 3942679363679719223}
   punchCooldown: 1
   isAttacking: 0
+--- !u!114 &424244900239838802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146969224911103723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae3ce94c484bcc48be393d4ce8099a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 8044653046116332223}
+  _gravityAcceleration: -30
+  _maxFallSpeed: 30
+  _maxForwardSpeed: 6
+  _maxBackwardSpeed: 5
+  _maxStrafeSpeed: 6
+  _jumpSpeed: 15

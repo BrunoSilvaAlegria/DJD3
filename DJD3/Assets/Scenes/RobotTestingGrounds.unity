@@ -491,11 +491,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1981258635 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 758186860971286334, guid: 610913f8e5a46654baf93da440185a75, type: 3}
-  m_PrefabInstance: {fileID: 2033310974}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2008719726
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,10 +659,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7158150806119193150, guid: 610913f8e5a46654baf93da440185a75, type: 3}
-      propertyPath: cameraToDisable
-      value: 
-      objectReference: {fileID: 1981258635}
     - target: {fileID: 8044653046116332223, guid: 610913f8e5a46654baf93da440185a75, type: 3}
       propertyPath: m_Name
       value: DefaultRobot 1
