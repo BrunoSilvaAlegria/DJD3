@@ -12,6 +12,7 @@ public class CommonCombat : MonoBehaviour
     public PlayerMovement playerMovement; // Assign in Inspector
     public ChangeCharacter characterSwitch; // Assign in Inspector
     public GameObject objectToDestroy;
+    [SerializeField] private GameObject flameObject;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isAttacking)
