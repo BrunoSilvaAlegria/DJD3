@@ -142,7 +142,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5971810702758352066}
+  m_Father: {fileID: 5316032788537202985}
   m_LocalEulerAnglesHint: {x: 5.099, y: 0, z: 0}
 --- !u!20 &9158177116926938999
 Camera:
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 5106977452155218954}
   shoulderOffset: 0.5
-  heightOffset: 1.5
+  heightOffset: 1
   distance: 4.5
   minDistance: 1
   maxDistance: 4.5
@@ -526,9 +526,7 @@ MonoBehaviour:
   shootPoint: {fileID: 6228695212652306899}
   projectileSpeed: 30
   playerMovement: {fileID: 424244900239838802}
-  characterSwitch: {fileID: 4231600544271389813}
   objectToDestroy: {fileID: 9146969224911103723}
-  flameObject: {fileID: 0}
 --- !u!1 &3000446064994351990
 GameObject:
   m_ObjectHideFlags: 0
@@ -15216,10 +15214,9 @@ GameObject:
   - component: {fileID: 5971810702758352066}
   - component: {fileID: 8066423007895772514}
   - component: {fileID: 3156865325269958922}
-  - component: {fileID: 4231600544271389813}
   m_Layer: 8
   m_Name: DefaultRobot 1
-  m_TagString: Controllable
+  m_TagString: Default
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15238,7 +15235,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7616447340545855786}
-  - {fileID: 6283819332465553734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8066423007895772514
@@ -15287,19 +15283,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1.9087502, z: 2}
   m_Center: {x: 0, y: 0.13334292, z: 0}
---- !u!114 &4231600544271389813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8044653046116332223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c928218a4a31a9748b8a2c0c133854ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectToDisable: {fileID: 9146969224911103723}
 --- !u!1 &9146969224911103723
 GameObject:
   m_ObjectHideFlags: 0
@@ -15314,7 +15297,7 @@ GameObject:
   - component: {fileID: 424244900239838802}
   m_Layer: 8
   m_Name: Controller
-  m_TagString: Untagged
+  m_TagString: Controllable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15334,6 +15317,7 @@ Transform:
   m_Children:
   - {fileID: 720199396742906303}
   - {fileID: 2283827745845255397}
+  - {fileID: 6283819332465553734}
   m_Father: {fileID: 7616447340545855786}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3942679363679719223

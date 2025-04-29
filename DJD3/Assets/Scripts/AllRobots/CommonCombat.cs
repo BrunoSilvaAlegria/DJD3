@@ -10,9 +10,8 @@ public class CommonCombat : MonoBehaviour
     public Transform shootPoint; // The position where the projectile is instantiated
     public float projectileSpeed = 10f; // Speed of the projectile
     public PlayerMovement playerMovement; // Assign in Inspector
-    public ChangeCharacter characterSwitch; // Assign in Inspector
     public GameObject objectToDestroy;
-    [SerializeField] private GameObject flameObject;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isAttacking)

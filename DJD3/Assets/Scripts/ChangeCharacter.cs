@@ -2,122 +2,64 @@ using UnityEngine;
 
 public class ChangeCharacter : MonoBehaviour
 {
-    private GameObject targetCharacter;
-    private GameObject currentCharacter;
-    private GameObject previousCharacter;
-    private bool canControl = false;
-    public GameObject objectToDisable;
+    public GameObject defaultReplacement; // Prefab for Default-tagged objects
+    public GameObject heavyReplacement;   // Prefab for Heavy-tagged objects
+    public GameObject objectToDestroy;    // Object to destroy when switching
 
-    void Start()
+    private GameObject targetObjectInTrigger = null;
+    private string targetTag = "";
+
+    void OnTriggerEnter(Collider other)
     {
-        targetCharacter = null;
-        currentCharacter = gameObject; // Start with the initial character
+        if (other.CompareTag("Default") || other.CompareTag("Heavy"))
+        {
+            targetObjectInTrigger = other.gameObject;
+            targetTag = other.tag;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == targetObjectInTrigger)
+        {
+            targetObjectInTrigger = null;
+            targetTag = "";
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("c") && canControl)
+        if (targetObjectInTrigger != null && Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log("C pressed");
-            ChangeController();
-        }
-    }
+            GameObject replacementPrefab = null;
 
-    private void ChangeController()
-    {
-        if (targetCharacter == null)
-        {
-            Debug.LogWarning("No target character selected.");
-            return;
-        }
-        objectToDisable.SetActive(false);
-        DisableAllCharacters(); // Disable all movement, cameras, and scripts
-        SetActiveCharacter(targetCharacter); // Activate only the new character
-        //Destroy(gameObject);
-        currentCharacter = targetCharacter;
-        targetCharacter = previousCharacter;
-        currentCharacter = gameObject;
-    }
-
-    private void DisableAllCharacters()
-    {
-        GameObject[] allCharacters = GameObject.FindGameObjectsWithTag("Controllable");
-        foreach (GameObject character in allCharacters)
-        {
-            // Disable movement
-            PlayerMovement movement = character.GetComponent<PlayerMovement>();
-            if (movement != null)
+            if (targetTag == "Default")
             {
-                movement.enabled = false;
+                replacementPrefab = defaultReplacement;
+                Debug.Log("Switching Default character");
+            }
+            else if (targetTag == "Heavy")
+            {
+                replacementPrefab = heavyReplacement;
+                Debug.Log("Switching Heavy character");
             }
 
-            // Disable camera
-            Camera cam = GetCameraFromCharacter(character);
-            if (cam != null)
+            if (replacementPrefab != null)
             {
-                cam.gameObject.SetActive(false);
+                GameObject newObject = Instantiate(replacementPrefab,
+                    targetObjectInTrigger.transform.position,
+                    targetObjectInTrigger.transform.rotation);
+                newObject.transform.localScale = targetObjectInTrigger.transform.localScale;
             }
 
-            // Disable this script
-            ChangeCharacter script = character.GetComponent<ChangeCharacter>();
-            if (script != null)
+            if (objectToDestroy != null)
             {
-                script.enabled = false;
-            }
-        }
-    }
-
-    private void SetActiveCharacter(GameObject character)
-    {
-        if (character != null)
-        {
-            // Enable movement
-            PlayerMovement movement = character.GetComponent<PlayerMovement>();
-            if (movement != null)
-            {
-                movement.enabled = true;
+                Destroy(objectToDestroy);
             }
 
-            // Enable camera
-            Camera cam = GetCameraFromCharacter(character);
-            if (cam != null)
-            {
-                cam.gameObject.SetActive(true);
-            }
-
-            // Enable this script on the new character
-            ChangeCharacter script = character.GetComponent<ChangeCharacter>();
-            if (script != null)
-            {
-                script.enabled = true;
-            }
-
-            Debug.Log($"{character.name} is now the active character.");
-        }
-    }
-
-    private Camera GetCameraFromCharacter(GameObject character)
-    {
-        if (character == null) return null;
-        return character.GetComponentInChildren<Camera>(true); // Find even disabled cameras
-    }
-
-    private void OnTriggerEnter(Collider target)
-    {
-        if (target.CompareTag("Controllable") && target.gameObject != currentCharacter)
-        {
-            Debug.Log($"Entered trigger of {target.name}");
-            targetCharacter = target.gameObject;
-            canControl = true;
-        }
-    }
-    private void OnTriggerExit(Collider target)
-    {
-        if (target.CompareTag("Controllable") && target.gameObject != currentCharacter)
-        {
-            Debug.Log($"Exited trigger of {target.name}");
-            targetCharacter = null;
-            canControl = false;
+            Destroy(targetObjectInTrigger);
+            targetObjectInTrigger = null;
+            targetTag = "";
         }
     }
 }

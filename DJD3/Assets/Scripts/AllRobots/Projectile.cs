@@ -2,30 +2,45 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public GameObject replacementPrefab;
+    public GameObject terrainPrefab;
+    public GameObject defaultPrefab;
+    public GameObject heavyPrefab;
     public Transform whereToSpawn;
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Check if the collided object has the "Controllable" tag
-        if (collision.gameObject.CompareTag("Controllable"))
+        GameObject hitObject = collision.gameObject;
+        int terrainLayer = LayerMask.NameToLayer("Terrain");
+
+        if (hitObject.layer == terrainLayer)
         {
-            Debug.Log("controlled");
-            Destroy(collision.gameObject);  // Destroy the "Controllable" object
+            Debug.Log("Hit terrain");
+            ReplaceObject(terrainPrefab);
+        }
+        else if (hitObject.CompareTag("Default"))
+        {
+            Debug.Log("Hit default tagged object");
+            Destroy(hitObject); // Optionally destroy the object
+            ReplaceObject(defaultPrefab);
+        }
+        else if (hitObject.CompareTag("Heavy"))
+        {
+            Debug.Log("Hit heavy tagged object");
+            ReplaceObject(heavyPrefab);
         }
         else
         {
-            ReplaceObject();
+            Debug.Log("Hit unknown object");
         }
-        Destroy(gameObject);  // Destroy the projectile itself
+
+        Destroy(gameObject); // Destroy the projectile
     }
 
-    public void ReplaceObject()
+    private void ReplaceObject(GameObject prefab)
     {
-        if (replacementPrefab != null)
+        if (prefab != null && whereToSpawn != null)
         {
-            // Use the prefab's rotation rather than whereToSpawn's rotation
-            Instantiate(replacementPrefab, whereToSpawn.position, replacementPrefab.transform.rotation);
+            Instantiate(prefab, whereToSpawn.position, prefab.transform.rotation);
         }
     }
 }
