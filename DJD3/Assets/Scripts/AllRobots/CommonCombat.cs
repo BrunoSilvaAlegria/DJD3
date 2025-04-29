@@ -11,6 +11,7 @@ public class CommonCombat : MonoBehaviour
     public float projectileSpeed = 10f; // Speed of the projectile
     public PlayerMovement playerMovement; // Assign in Inspector
     public GameObject objectToDestroy;
+    [SerializeField] private GameObject objectToUntag;
 
     void Update()
     {
@@ -51,8 +52,10 @@ public class CommonCombat : MonoBehaviour
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                rb.linearVelocity = shootPoint.forward * projectileSpeed; // Launch the projectile
+                rb.linearVelocity = shootPoint.forward * projectileSpeed;
                 Destroy(objectToDestroy);
+                if (objectToUntag != null)
+                    objectToUntag.tag = "Dead";
             }
         }
         else

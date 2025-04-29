@@ -2,31 +2,34 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
-    public Transform targetObject; // The object you want to move
-    public float moveSpeed = 5f;
-    public float rotationSpeed = 100f;
+    public float moveSpeed = 5f; // Speed at which the object moves
+    public float rotateSpeed = 100f; // Speed at which the object rotates
+
+    private Rigidbody rb;
+
+    void Start()
+    {
+        // Get the Rigidbody component attached to the object
+        rb = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {
-        if (targetObject == null)
-            return;
+        // Movement
+        float moveForward = Input.GetKey(KeyCode.W) ? 1f : (Input.GetKey(KeyCode.S) ? -1f : 0f);
+        Vector3 moveDirection = transform.forward * moveForward;
 
-        // Move forward/backward
-        float moveDirection = 0f;
-        if (Input.GetKey(KeyCode.W))
-            moveDirection = 1f;
-        else if (Input.GetKey(KeyCode.S))
-            moveDirection = -1f;
+        // Apply movement to the object
+        rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, rb.linearVelocity.y, moveDirection.z * moveSpeed);
 
-        targetObject.Translate(Vector3.forward * moveDirection * moveSpeed * Time.deltaTime);
-
-        // Rotate left/right
-        float rotationDirection = 0f;
+        // Rotation
+        float rotateDirection = 0f;
         if (Input.GetKey(KeyCode.A))
-            rotationDirection = -1f;
+            rotateDirection = -1f;
         else if (Input.GetKey(KeyCode.D))
-            rotationDirection = 1f;
+            rotateDirection = 1f;
 
-        targetObject.Rotate(Vector3.up * rotationDirection * rotationSpeed * Time.deltaTime);
+        // Apply rotation to the object
+        transform.Rotate(0f, rotateDirection * rotateSpeed * Time.deltaTime, 0f);
     }
 }

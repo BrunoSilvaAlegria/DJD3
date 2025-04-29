@@ -20,17 +20,24 @@ public class Projectile : MonoBehaviour
         else if (hitObject.CompareTag("Default"))
         {
             Debug.Log("Hit default tagged object");
-            Destroy(hitObject); // Optionally destroy the object
+            Destroy(hitObject);
             ReplaceObject(defaultPrefab);
         }
         else if (hitObject.CompareTag("Heavy"))
         {
             Debug.Log("Hit heavy tagged object");
+            Destroy(hitObject);
             ReplaceObject(heavyPrefab);
+        }
+        else if (hitObject.CompareTag("Dead"))
+        {
+            Debug.Log("Hit Dead tagged object");
+            ReplaceObject(terrainPrefab);
         }
         else
         {
             Debug.Log("Hit unknown object");
+            
         }
 
         Destroy(gameObject); // Destroy the projectile
