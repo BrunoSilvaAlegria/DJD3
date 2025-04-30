@@ -173,6 +173,8 @@ GameObject:
   - component: {fileID: 725213548522595058}
   - component: {fileID: 4715867945295769279}
   - component: {fileID: 8731066121182867058}
+  - component: {fileID: 6019162638224531493}
+  - component: {fileID: 2108647301327754661}
   m_Layer: 8
   m_Name: Default Arm
   m_TagString: Untagged
@@ -227,7 +229,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f23e191b19b29b24f8fd927acd09db0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -287,6 +289,44 @@ MonoBehaviour:
   projectileSpeed: 10
   objectToDestroy: {fileID: 9146969224911103723}
   objectToUntag: {fileID: 8044653046116332223}
+--- !u!114 &6019162638224531493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2923367771415577715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b831994d17476c448b85d8e2a8f71bf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2108647301327754661}
+  punchCooldown: 0.5
+  isAttacking: 0
+  playerMovement: {fileID: 424244900239838802}
+--- !u!95 &2108647301327754661
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2923367771415577715}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b19293b24143d874a895944b308cf6fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2952574524261653614
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,8 +339,6 @@ GameObject:
   - component: {fileID: 7998163685053939318}
   - component: {fileID: 4198588645720045307}
   - component: {fileID: 6100515755652168762}
-  - component: {fileID: 313283644625931817}
-  - component: {fileID: 7158150806119193150}
   m_Layer: 8
   m_Name: Arm
   m_TagString: Untagged
@@ -355,7 +393,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f23e191b19b29b24f8fd927acd09db0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -398,44 +436,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!95 &313283644625931817
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2952574524261653614}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b19293b24143d874a895944b308cf6fb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7158150806119193150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2952574524261653614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b831994d17476c448b85d8e2a8f71bf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 313283644625931817}
-  punchCooldown: 0.7
-  isAttacking: 0
-  playerMovement: {fileID: 424244900239838802}
 --- !u!1 &3000446064994351990
 GameObject:
   m_ObjectHideFlags: 0
@@ -15093,7 +15093,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5316032788537202985}
   - component: {fileID: 3942679363679719223}
-  - component: {fileID: 6761736409992043116}
   - component: {fileID: 424244900239838802}
   m_Layer: 8
   m_Name: Controller
@@ -15142,21 +15141,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6761736409992043116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9146969224911103723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e2db2bf1c2ef6c478f21c319fe100b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 3942679363679719223}
-  punchCooldown: 1
-  isAttacking: 0
 --- !u!114 &424244900239838802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15236,6 +15220,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 3f1a764083b521442b1e2564599af0a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f23e191b19b29b24f8fd927acd09db0e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 3f1a764083b521442b1e2564599af0a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 88be9e452e515644eb356ed1f24a0ff0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 3f1a764083b521442b1e2564599af0a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f23e191b19b29b24f8fd927acd09db0e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 3f1a764083b521442b1e2564599af0a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f23e191b19b29b24f8fd927acd09db0e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 3f1a764083b521442b1e2564599af0a5, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f23e191b19b29b24f8fd927acd09db0e, type: 2}
     - target: {fileID: 919132149155446097, guid: 3f1a764083b521442b1e2564599af0a5, type: 3}
       propertyPath: m_Name
       value: HeavyModel
