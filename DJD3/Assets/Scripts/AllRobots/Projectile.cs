@@ -1,11 +1,31 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
     public GameObject terrainPrefab;
     public GameObject defaultPrefab;
     public GameObject heavyPrefab;
     public Transform whereToSpawn;
+
+    public float launchForce = 20f; // Speed of the projectile
+
+    private Rigidbody rb;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+
+        if (whereToSpawn != null)
+        {
+            // Launch the projectile in the direction the spawn point is facing
+            rb.linearVelocity = whereToSpawn.forward * launchForce;
+        }
+        else
+        {
+            Debug.LogWarning("Spawn point not set on projectile.");
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -37,7 +57,6 @@ public class Projectile : MonoBehaviour
         else
         {
             Debug.Log("Hit unknown object");
-            
         }
 
         Destroy(gameObject); // Destroy the projectile

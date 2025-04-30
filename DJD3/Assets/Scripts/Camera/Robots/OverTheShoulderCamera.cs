@@ -2,55 +2,114 @@ using UnityEngine;
 
 public class OverTheShoulderCamera : MonoBehaviour
 {
-    public Transform target; // Player transform
-    public float shoulderOffset = 0.5f; // Offset to the right (negative for left shoulder)
-    public float heightOffset = 1.5f; // Height adjustment from the player's position
-    public float distance = 3.5f; // Default camera distance
-    public float minDistance = 1.0f; // Closest it can get when avoiding obstacles
-    public float maxDistance = 4.5f; // Max camera distance
-    public float sensitivity = 2.0f; // Mouse sensitivity
-    public float smoothSpeed = 5.0f; // Camera movement smoothness
-    public LayerMask obstacleLayers; // Layers the camera should detect as obstacles
-    public LayerMask excludedLayers; // Layers the camera should ignore
+    public Transform target;
+    public float shoulderOffset = 0.5f;
+    public float heightOffset = 1.5f;
+    public float distance = 3.5f;
+    public float minDistance = 1.0f;
+    public float maxDistance = 4.5f;
+    public float sensitivity = 2.0f;
+    public float smoothSpeed = 5.0f;
+    public LayerMask obstacleLayers;
+    public LayerMask excludedLayers;
+
+    [Header("Aiming Settings")]
+    public float aimDistance = 2.0f;
+    public float aimShoulderOffset = 0.2f;
+    public float aimSensitivity = 1.0f;
+
+    [Header("Object Rotation Sync")]
+    public Transform objectToRotateWithCamera;
+
+    [Header("Script Toggle While Aiming")]
+    public MonoBehaviour scriptToToggleWhileAiming;
+
+    private float currentDistance;
+    private float currentShoulderOffset;
+    private float currentSensitivity;
 
     private float yaw = 0.0f;
     private float pitch = 0.0f;
+
+    private bool isScriptEnabled = false;
+    private bool wasAiming = false;
+    private float originalXRotation;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        currentDistance = distance;
+        currentShoulderOffset = shoulderOffset;
+        currentSensitivity = sensitivity;
+
+        if (scriptToToggleWhileAiming)
+            scriptToToggleWhileAiming.enabled = false;
+
+        if (objectToRotateWithCamera)
+            originalXRotation = objectToRotateWithCamera.eulerAngles.x;
     }
 
     void LateUpdate()
     {
         if (!target) return;
 
-        // Mouse input for rotation
-        yaw += Input.GetAxis("Mouse X") * sensitivity;
-        pitch -= Input.GetAxis("Mouse Y") * sensitivity;
-        pitch = Mathf.Clamp(pitch, -20f, 50f); // Restrict vertical rotation
+        bool isAiming = Input.GetMouseButton(1); // RMB
 
-        // Calculate rotation
+        // Toggle script
+        if (scriptToToggleWhileAiming && isAiming != isScriptEnabled)
+        {
+            scriptToToggleWhileAiming.enabled = isAiming;
+            isScriptEnabled = isAiming;
+        }
+
+        // Rotate object or reset X rotation
+        if (objectToRotateWithCamera)
+        {
+            if (isAiming)
+            {
+                Vector3 currentEuler = objectToRotateWithCamera.eulerAngles;
+                currentEuler.x = pitch;
+                objectToRotateWithCamera.rotation = Quaternion.Euler(currentEuler);
+            }
+            else if (wasAiming) // Just stopped aiming
+            {
+                Vector3 currentEuler = objectToRotateWithCamera.eulerAngles;
+                currentEuler.x = originalXRotation;
+                objectToRotateWithCamera.rotation = Quaternion.Euler(currentEuler);
+            }
+        }
+
+        // Update aiming state
+        wasAiming = isAiming;
+
+        float targetDistance = isAiming ? aimDistance : maxDistance;
+        float targetShoulderOffset = isAiming ? aimShoulderOffset : shoulderOffset;
+        float targetSensitivity = isAiming ? aimSensitivity : sensitivity;
+
+        currentShoulderOffset = Mathf.Lerp(currentShoulderOffset, targetShoulderOffset, Time.deltaTime * smoothSpeed);
+        currentSensitivity = Mathf.Lerp(currentSensitivity, targetSensitivity, Time.deltaTime * smoothSpeed);
+
+        yaw += Input.GetAxis("Mouse X") * currentSensitivity;
+        pitch -= Input.GetAxis("Mouse Y") * currentSensitivity;
+        pitch = Mathf.Clamp(pitch, -20f, 50f);
+
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+        Vector3 shoulderPosition = target.position + (Vector3.up * heightOffset) + (target.right * currentShoulderOffset);
+        Vector3 desiredPosition = shoulderPosition - (rotation * Vector3.forward * currentDistance);
 
-        // Shoulder position with height offset
-        Vector3 shoulderPosition = target.position + (Vector3.up * heightOffset) + (target.right * shoulderOffset);
-        Vector3 desiredPosition = shoulderPosition - (rotation * Vector3.forward * distance);
-
-        // Check for obstacles while ignoring excluded layers
         int combinedLayerMask = obstacleLayers & ~excludedLayers;
         if (Physics.Raycast(shoulderPosition, (desiredPosition - shoulderPosition).normalized, out RaycastHit hit, maxDistance, combinedLayerMask))
         {
-            distance = Mathf.Clamp(hit.distance * 0.9f, minDistance, maxDistance); // Move closer
+            currentDistance = Mathf.Clamp(hit.distance * 0.9f, minDistance, maxDistance);
         }
         else
         {
-            distance = Mathf.Lerp(distance, maxDistance, Time.deltaTime * smoothSpeed); // Reset distance smoothly
+            currentDistance = Mathf.Lerp(currentDistance, targetDistance, Time.deltaTime * smoothSpeed);
         }
 
-        // Update final position
-        desiredPosition = shoulderPosition - (rotation * Vector3.forward * distance);
+        desiredPosition = shoulderPosition - (rotation * Vector3.forward * currentDistance);
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * smoothSpeed);
     }

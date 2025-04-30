@@ -4,14 +4,9 @@ using System.Collections;
 public class CommonCombat : MonoBehaviour
 {
     public Animator animator;
-    public float punchCooldown = 0.5f; // Cooldown time in seconds
+    public float punchCooldown = 0.5f;
     [SerializeField] private bool isAttacking = false;
-    public GameObject projectilePrefab; // Assign your projectile prefab in the Inspector
-    public Transform shootPoint; // The position where the projectile is instantiated
-    public float projectileSpeed = 10f; // Speed of the projectile
     public PlayerMovement playerMovement; // Assign in Inspector
-    public GameObject objectToDestroy;
-    [SerializeField] private GameObject objectToUntag;
 
     void Update()
     {
@@ -19,18 +14,13 @@ public class CommonCombat : MonoBehaviour
         {
             isAttacking = true;
             animator.SetTrigger("Punching");
-            StartCoroutine(PunchCooldown()); // Start cooldown immediately
-        }
-
-        if (Input.GetMouseButtonDown(0)) // Left Mouse Button
-        {
-            Shoot();
+            StartCoroutine(PunchCooldown());
         }
     }
 
     public void OnPunchEnd()
     {
-        animator.SetTrigger("ReturnArm"); // Play the return animation
+        animator.SetTrigger("ReturnArm");
     }
 
     public void OnReturnEnd()
@@ -42,25 +32,5 @@ public class CommonCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(punchCooldown);
         isAttacking = false;
-    }
-
-    void Shoot()
-    {
-        if (projectilePrefab != null && shootPoint != null)
-        {
-            GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.linearVelocity = shootPoint.forward * projectileSpeed;
-                Destroy(objectToDestroy);
-                if (objectToUntag != null)
-                    objectToUntag.tag = "Dead";
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Projectile prefab or shoot point not assigned!");
-        }
     }
 }
