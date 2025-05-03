@@ -35,9 +35,9 @@ public class CommonCombat : MonoBehaviour
         foreach (Collider hit in hits)
         {
             Transform target = hit.transform;
-            if (target.GetComponent<EnemyStatus>() != null)
+            if (target.GetComponent<RobotStatus>() != null)
             {
-                EnemyStatus enemy = target.GetComponent<EnemyStatus>();
+                RobotStatus enemy = target.GetComponent<RobotStatus>();
                 enemy.GetHit(damage);
             }
             StartCoroutine(ApplyKnockback(target));

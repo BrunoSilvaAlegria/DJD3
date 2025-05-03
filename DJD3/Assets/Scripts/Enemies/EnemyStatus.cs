@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyStatus : MonoBehaviour
+public class RobotStatus : MonoBehaviour
 {
     public int maxHealth;
     public int currentHealth;
