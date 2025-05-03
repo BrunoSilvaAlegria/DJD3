@@ -82,7 +82,7 @@ public class CommonCombat : MonoBehaviour
             }
             catch (Exception ex)
             {
-                Debug.Log("Target Destroyed, cant knockback");
+                Debug.Log($"Target Destroyed, cant knockback {ex}");
             }
             yield return null;
 
