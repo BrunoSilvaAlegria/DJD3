@@ -25,6 +25,7 @@ public class HeavyCombat : MonoBehaviour
     private float runTimer = 0f;
     private float cooldownTimer = 0f;
     private bool isInCooldown = false;
+    public int damage = 1;
 
     private CharacterController characterController;
 

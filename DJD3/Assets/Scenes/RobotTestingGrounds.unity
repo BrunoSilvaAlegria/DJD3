@@ -5650,6 +5650,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4400507771814876509, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: maxHealth
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4406138303795586270, guid: 610913f8e5a46654baf93da440185a75, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -6427,7 +6431,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 27.971, y: 1, z: 19.675}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 302634833}

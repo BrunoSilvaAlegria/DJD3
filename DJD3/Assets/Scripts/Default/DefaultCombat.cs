@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class DefaultCombat : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class DefaultCombat : MonoBehaviour
     public float punchRadius = 1f;
     public float knockbackDistance = 2f;
     public float knockbackDuration = 0.2f;
+    public int damage = 1;
     public LayerMask robotLayer; // Set to "Robot" layer in Inspector
 
     void Update()
@@ -33,6 +35,11 @@ public class DefaultCombat : MonoBehaviour
         foreach (Collider hit in hits)
         {
             Transform target = hit.transform;
+            if (target.GetComponent<EnemyStatus>() != null)
+            {
+                EnemyStatus enemy = target.GetComponent<EnemyStatus>();
+                enemy.GetHit(damage);
+            }
             StartCoroutine(ApplyKnockback(target));
         }
     }
@@ -63,14 +70,23 @@ public class DefaultCombat : MonoBehaviour
 
         while (elapsed < knockbackDuration)
         {
-            // Apply knockback only in the X and Z axes
-            target.position = new Vector3(
-                Mathf.Lerp(start.x, end.x, elapsed / knockbackDuration),
-                target.position.y, // Keep the original Y position
-                Mathf.Lerp(start.z, end.z, elapsed / knockbackDuration)
-            );
-            elapsed += Time.deltaTime;
+            try
+            {
+                // Apply knockback only in the X and Z axes
+                target.position = new Vector3(
+                    Mathf.Lerp(start.x, end.x, elapsed / knockbackDuration),
+                    target.position.y, // Keep the original Y position
+                    Mathf.Lerp(start.z, end.z, elapsed / knockbackDuration)
+                    );
+                elapsed += Time.deltaTime;
+                
+            }
+            catch (Exception ex)
+            {
+                Debug.Log("Target Destroyed, cant knockback");
+            }
             yield return null;
+
         }
 
         // Final position to ensure exact knockback distance

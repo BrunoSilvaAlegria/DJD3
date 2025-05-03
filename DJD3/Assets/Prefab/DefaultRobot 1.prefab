@@ -1420,6 +1420,7 @@ MonoBehaviour:
   punchRadius: 0.4
   knockbackDistance: 2
   knockbackDuration: 0.1
+  damage: 1
   robotLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -17930,6 +17931,7 @@ GameObject:
   - component: {fileID: 5971810702758352066}
   - component: {fileID: 8066423007895772514}
   - component: {fileID: 3156865325269958922}
+  - component: {fileID: 4400507771814876509}
   m_Layer: 9
   m_Name: DefaultRobot 1
   m_TagString: Default
@@ -17999,6 +18001,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1.9087502, z: 2}
   m_Center: {x: 0, y: 0.13334292, z: 0}
+--- !u!114 &4400507771814876509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044653046116332223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ec93ff61214464da99d839bb9f36aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  currentHealth: 0
+  canTakeOver: 0
+  objectToDestroy: {fileID: 8044653046116332223}
+  invincible: 0.5
 --- !u!1 &8106344139937959373
 GameObject:
   m_ObjectHideFlags: 0
@@ -18494,6 +18513,7 @@ MonoBehaviour:
   punchRadius: 0.4
   knockbackDistance: 5
   knockbackDuration: 0.2
+  damage: 1
   robotLayer:
     serializedVersion: 2
     m_Bits: 256
