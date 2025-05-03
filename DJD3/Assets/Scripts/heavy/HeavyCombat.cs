@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HeavyCombat : MonoBehaviour
@@ -12,6 +13,9 @@ public class HeavyCombat : MonoBehaviour
 
     public float runDuration = 3f;
     public float runCooldown = 5f;
+
+    public float knockbackDistance = 3f;
+    public float knockbackDuration = 0.2f;
 
     private float currentSpeed = 0f;
     private bool isActionActive = true;
@@ -59,24 +63,26 @@ public class HeavyCombat : MonoBehaviour
         }
         else
         {
-            // Restore robot when pinning ends
+            // When exiting heavy run
             if (isPining)
             {
                 if (pinnedRobot != null)
                 {
-                    // Save world position & rotation
+                    // Store world position and rotation
                     Vector3 worldPos = pinnedRobot.transform.position;
                     Quaternion worldRot = pinnedRobot.transform.rotation;
 
-                    // Restore hierarchy
+                    // Detach
                     pinnedRobot.transform.SetParent(originalParent);
                     pinnedRobot.transform.position = worldPos;
                     pinnedRobot.transform.rotation = worldRot;
 
-                    pinnedRobot = null;
-                    originalParent = null;
+                    // Knockback
+                    StartCoroutine(ApplyKnockback(pinnedRobot.transform));
                 }
 
+                pinnedRobot = null;
+                originalParent = null;
                 isPining = false;
             }
 
@@ -111,8 +117,8 @@ public class HeavyCombat : MonoBehaviour
             Pin();
         }
 
-        // Destroy pinned robot if it touches Terrain while pinned
-        if (isPining && pinnedRobot != null && collision.gameObject.layer == LayerMask.NameToLayer("Terrain"))
+        // Destroy pinned robot if it hits terrain while pinned
+        if (isPining && pinnedRobot != null && layer == LayerMask.NameToLayer("Terrain"))
         {
             Destroy(pinnedRobot.gameObject);
             pinnedRobot = null;
@@ -150,5 +156,30 @@ public class HeavyCombat : MonoBehaviour
         isInCooldown = true;
         runTimer = 0f;
         heavyRun = false;
+    }
+
+    private IEnumerator ApplyKnockback(Transform target)
+    {
+        Vector3 direction = (target.position - transform.position);
+        direction.y = 0f;
+        direction.Normalize();
+
+        Vector3 start = target.position;
+        Vector3 end = start + direction * knockbackDistance;
+
+        float elapsed = 0f;
+
+        while (elapsed < knockbackDuration)
+        {
+            target.position = new Vector3(
+                Mathf.Lerp(start.x, end.x, elapsed / knockbackDuration),
+                target.position.y,
+                Mathf.Lerp(start.z, end.z, elapsed / knockbackDuration)
+            );
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        target.position = new Vector3(end.x, target.position.y, end.z);
     }
 }
