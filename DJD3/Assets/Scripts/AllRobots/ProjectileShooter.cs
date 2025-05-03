@@ -28,6 +28,7 @@ public class ProjectileShooter : MonoBehaviour
                 Destroy(objectToDestroy);
                 if (objectToUntag != null)
                     objectToUntag.tag = "Dead";
+                    objectToUntag.layer = LayerMask.NameToLayer("Robot");
             }
         }
         else
