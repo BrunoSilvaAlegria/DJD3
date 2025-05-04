@@ -115,7 +115,7 @@ MonoBehaviour:
   aimShoulderOffset: 1
   aimSensitivity: 1
   objectToRotateWithCamera: {fileID: 2283827745845255397}
-  scriptToToggleWhileAiming: {fileID: 8731066121182867058}
+  objectToToggleWhileAiming: {fileID: 0}
 --- !u!114 &3942149260863627545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15043,6 +15043,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flameObject: {fileID: 3442963826378403391}
+  targetToFollow: {fileID: 0}
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  fuelRate: 0
 --- !u!1 &8044653046116332223
 GameObject:
   m_ObjectHideFlags: 0
@@ -15143,6 +15147,11 @@ MonoBehaviour:
   objectToDestroy: {fileID: 8044653046116332223}
   invincible: 0.5
   fuelPerHit: 40
+  timeTillHit: 1
+  burnTimer: 5
+  burningDamage: 5
+  initialBurningDamage: 2
+  fire: {fileID: 0}
 --- !u!1 &9146969224911103723
 GameObject:
   m_ObjectHideFlags: 0
@@ -15159,7 +15168,7 @@ GameObject:
   - component: {fileID: 8506590537885278452}
   m_Layer: 8
   m_Name: Controller
-  m_TagString: Controllable
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
