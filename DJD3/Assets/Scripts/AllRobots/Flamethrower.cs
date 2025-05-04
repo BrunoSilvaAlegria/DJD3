@@ -19,7 +19,7 @@ public class Flamethrower : MonoBehaviour
     void FixedUpdate()
     {
         // Flame control logic
-        if (Input.GetMouseButton(0)) // While holding MB0
+        if (Input.GetMouseButton(0) && playerManager.currentFuel > 0) // While holding MB0
         {
             if (!flameObject.activeSelf)
                 flameObject.SetActive(true);

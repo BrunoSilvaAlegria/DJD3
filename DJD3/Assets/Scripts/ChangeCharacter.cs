@@ -9,6 +9,9 @@ public class ChangeCharacter : MonoBehaviour
     private GameObject targetObjectInTrigger = null;
     private string targetTag = "";
 
+    public Transform whereToSpawn;
+
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Default") || other.CompareTag("Heavy"))
@@ -46,10 +49,7 @@ public class ChangeCharacter : MonoBehaviour
 
             if (replacementPrefab != null)
             {
-                GameObject newObject = Instantiate(replacementPrefab,
-                    targetObjectInTrigger.transform.position,
-                    targetObjectInTrigger.transform.rotation);
-                newObject.transform.localScale = targetObjectInTrigger.transform.localScale;
+               ReplaceObject(replacementPrefab);
             }
 
             if (objectToDestroy != null)
@@ -60,6 +60,14 @@ public class ChangeCharacter : MonoBehaviour
             Destroy(targetObjectInTrigger);
             targetObjectInTrigger = null;
             targetTag = "";
+        }
+    }
+
+    private void ReplaceObject(GameObject prefab)
+    {
+        if (prefab != null && whereToSpawn != null)
+        {
+            Instantiate(prefab, whereToSpawn.position, prefab.transform.rotation);
         }
     }
 }

@@ -16857,7 +16857,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9140399147042332401
 Transform:
   m_ObjectHideFlags: 0
@@ -18558,7 +18558,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8044653046116332223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.52
   m_Speed: 3.5
@@ -19070,13 +19070,14 @@ GameObject:
   - component: {fileID: 3942679363679719223}
   - component: {fileID: 6761736409992043116}
   - component: {fileID: 424244900239838802}
+  - component: {fileID: 4518205836648125713}
   m_Layer: 9
   m_Name: Controller
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5316032788537202985
 Transform:
   m_ObjectHideFlags: 0
@@ -19161,6 +19162,33 @@ MonoBehaviour:
   _maxBackwardSpeed: 5
   _maxStrafeSpeed: 6
   _jumpSpeed: 15
+--- !u!54 &4518205836648125713
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146969224911103723}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1001 &1801062388477930954
 PrefabInstance:
   m_ObjectHideFlags: 0
