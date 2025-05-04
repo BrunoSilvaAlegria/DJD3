@@ -22,7 +22,7 @@ public class OverTheShoulderCamera : MonoBehaviour
     public Transform objectToRotateWithCamera;
 
     [Header("Script Toggle While Aiming")]
-    public MonoBehaviour scriptToToggleWhileAiming;
+    public GameObject objectToToggleWhileAiming;
 
     private float currentDistance;
     private float currentShoulderOffset;
@@ -44,8 +44,8 @@ public class OverTheShoulderCamera : MonoBehaviour
         currentShoulderOffset = shoulderOffset;
         currentSensitivity = sensitivity;
 
-        if (scriptToToggleWhileAiming)
-            scriptToToggleWhileAiming.enabled = false;
+        if (objectToToggleWhileAiming)
+            objectToToggleWhileAiming.active = false;
 
         if (objectToRotateWithCamera)
             originalXRotation = objectToRotateWithCamera.eulerAngles.x;
@@ -58,9 +58,9 @@ public class OverTheShoulderCamera : MonoBehaviour
         bool isAiming = Input.GetMouseButton(1); // RMB
 
         // Toggle script
-        if (scriptToToggleWhileAiming && isAiming != isScriptEnabled)
+        if (objectToToggleWhileAiming && isAiming != isScriptEnabled)
         {
-            scriptToToggleWhileAiming.enabled = isAiming;
+            objectToToggleWhileAiming.active = isAiming;
             isScriptEnabled = isAiming;
         }
 

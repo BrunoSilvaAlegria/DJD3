@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class RobotStatus : MonoBehaviour
 {
@@ -16,8 +17,19 @@ public class RobotStatus : MonoBehaviour
 
     private PlayerManager playerManager;
 
+    [Header("Burning Damage Settings")]
+    public float timeTillHit = 1.0f;      // How often the damage is applied
+    public float burnTimer = 5.0f;        // Total duration of the burn
+    public int burningDamage = 5;         // Amount of damage per tick
+    public int initialBurningDamage = 2;
+
+    public GameObject fire;
+
+    private Coroutine burnCoroutine;
+
     void Start()
     {
+        fire.active = false;
         currentHealth = maxHealth;
         playerManager = FindAnyObjectByType<PlayerManager>();
     }
@@ -25,7 +37,7 @@ public class RobotStatus : MonoBehaviour
     void Update()
     {
         if (currentHealth <= healthToTakeOver)
-        canTakeOver = true;
+            canTakeOver = true;
     }
 
     public void GetHit(int damage)
@@ -37,7 +49,10 @@ public class RobotStatus : MonoBehaviour
         }
 
         lastHitTime = Time.time;
-        playerManager.GainFuel(fuelPerHit);
+        if(fire.active == false)
+        {
+            playerManager.GainFuel(fuelPerHit);
+        }
         currentHealth -= damage;
         Debug.Log($"Robot hit for {damage} damage");
 
@@ -46,5 +61,30 @@ public class RobotStatus : MonoBehaviour
             Debug.Log("Robot killed");
             Destroy(objectToDestroy);
         }
+    }
+
+    public void StartOrResetBurn()
+    {
+        if (burnCoroutine != null)
+        {
+            StopCoroutine(burnCoroutine);
+        }
+        burnCoroutine = StartCoroutine(BurnOverTime());
+    }
+
+    private IEnumerator BurnOverTime()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < burnTimer)
+        {
+            fire.active = true;
+            GetHit(initialBurningDamage);
+            yield return new WaitForSeconds(timeTillHit);
+            GetHit(burningDamage);
+            elapsed += timeTillHit;
+        }
+        fire.active = false;
+        burnCoroutine = null;
     }
 }
