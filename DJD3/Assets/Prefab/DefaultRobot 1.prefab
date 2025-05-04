@@ -16140,7 +16140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &991580358882879861
 Transform:
   m_ObjectHideFlags: 0
@@ -16636,7 +16636,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9140399147042332401
 Transform:
   m_ObjectHideFlags: 0
@@ -16664,9 +16664,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02748b6126a9a1544afeffb1b559fab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Player
-  stopDistance: 5
-  speed: 3
+  aiObject: {fileID: 8044653046116332223}
+  minDistance: 2
+  maxDistance: 15
 --- !u!1 &4894867899657911564
 GameObject:
   m_ObjectHideFlags: 0
@@ -17940,7 +17940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6966940564211706084
 Transform:
   m_ObjectHideFlags: 0
@@ -18114,6 +18114,7 @@ GameObject:
   - component: {fileID: 8066423007895772514}
   - component: {fileID: 3156865325269958922}
   - component: {fileID: 5075659027121884543}
+  - component: {fileID: 1530726404697536308}
   m_Layer: 9
   m_Name: DefaultRobot 1
   m_TagString: Default
@@ -18207,6 +18208,28 @@ MonoBehaviour:
   burningDamage: 2
   initialBurningDamage: 1
   fire: {fileID: 4334036789229396384}
+--- !u!195 &1530726404697536308
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044653046116332223}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.52
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.95
+  m_BaseOffset: 0.99
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8106344139937959373
 GameObject:
   m_ObjectHideFlags: 0

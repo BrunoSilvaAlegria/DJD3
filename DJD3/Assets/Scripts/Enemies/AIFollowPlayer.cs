@@ -1,48 +1,35 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIFollowTarget : MonoBehaviour
+public class AIFollowPlayer : MonoBehaviour
 {
-    public string targetTag = "Target";   // The tag of the target object
-    public float stopDistance = 5f;       // Distance at which the AI will stop
-    public float speed = 3f;              // Speed of the AI's movement
-
+    public GameObject aiObject; // Reference to the AI object
+    public float minDistance = 5f; // Minimum distance the AI should stay from the player
+    public float maxDistance = 10f; // Maximum distance the AI will follow the player
     private NavMeshAgent agent;
-    private Transform target;
+    private Transform player;
 
     void Start()
     {
-        // Get the NavMeshAgent component
-        agent = GetComponent<NavMeshAgent>();
-        agent.speed = speed;
-
-        // Find the target by its tag
-        target = GameObject.FindGameObjectWithTag(targetTag)?.transform;
-        
-        if (target == null)
-        {
-            Debug.LogError("Target with tag '" + targetTag + "' not found in the scene.");
-        }
+        agent = aiObject.GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component from the aiObject
+        player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player using its tag
     }
 
     void Update()
     {
-        // Ensure the target has been found
-        if (target != null)
+        float distanceToPlayer = Vector3.Distance(aiObject.transform.position, player.position); // Distance from the AI to the player
+        
+        // If the player is farther than the maximum distance, move towards the player
+        if (distanceToPlayer > maxDistance)
         {
-            // Calculate the distance between the AI and the target
-            float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-            // If the distance is greater than the stop distance, move towards the target
-            if (distanceToTarget > stopDistance)
-            {
-                agent.SetDestination(target.position);
-            }
-            else
-            {
-                // Stop the agent if within the stop distance
-                agent.SetDestination(transform.position);
-            }
+            agent.SetDestination(player.position);
+        }
+        // If the player is closer than the minimum distance, move away from the player
+        else if (distanceToPlayer < minDistance)
+        {
+            Vector3 directionAwayFromPlayer = aiObject.transform.position - player.position;
+            Vector3 newPosition = aiObject.transform.position + directionAwayFromPlayer.normalized * (minDistance - distanceToPlayer);
+            agent.SetDestination(newPosition);
         }
     }
 }
