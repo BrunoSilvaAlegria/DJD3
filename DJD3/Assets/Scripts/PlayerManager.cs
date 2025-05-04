@@ -3,6 +3,13 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Health")]
+    public Slider healthSlider;
+    public int maxHealth;
+    public int currentHealth;
+    private float lastHitTime = -Mathf.Infinity;
+    public float invincible;
+    [Header("Fuel")]
     public Slider fuelSlider;
     public int maxFuel;
     public int currentFuel;
@@ -10,6 +17,7 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         currentFuel = maxFuel;
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -18,6 +26,21 @@ public class PlayerManager : MonoBehaviour
         if (fuelSlider.value != currentFuel)
         {
             fuelSlider.value = currentFuel;
+        }
+
+        if (healthSlider.value != currentHealth)
+        {
+            healthSlider.value = currentHealth;
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            SpendHealth(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            GainHealth(1);
         }
     }
 
@@ -36,6 +59,31 @@ public class PlayerManager : MonoBehaviour
         if(currentFuel > maxFuel)
         {
             currentFuel = maxFuel;
+        }
+    }
+
+        public void SpendHealth(int health)
+    {
+        if (Time.time - lastHitTime < invincible)
+        {
+            Debug.Log("Hit ignored due to invincibility");
+            return;
+        }
+        lastHitTime = Time.time;
+        currentHealth -= health;
+        
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+    }
+
+    public void GainHealth(int health)
+    {
+        currentHealth += health;
+        if(currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
         }
     }
 }
