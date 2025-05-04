@@ -40,14 +40,38 @@ public class Projectile : MonoBehaviour
         else if (hitObject.CompareTag("Default"))
         {
             Debug.Log("Hit default tagged object");
-            Destroy(hitObject);
-            ReplaceObject(defaultPrefab);
+            if (hitObject.GetComponent<RobotStatus>() != null)
+            {
+                RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
+                if (enemy.canTakeOver)
+                {
+                    Destroy(hitObject);
+                    ReplaceObject(defaultPrefab);
+                }
+                else
+                {
+                    ReplaceObject(terrainPrefab);
+                }
+                
+            }
         }
         else if (hitObject.CompareTag("Heavy"))
         {
-            Debug.Log("Hit heavy tagged object");
-            Destroy(hitObject);
-            ReplaceObject(heavyPrefab);
+            Debug.Log("Hit default tagged object");
+            if (hitObject.GetComponent<RobotStatus>() != null)
+            {
+                RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
+                if (enemy.canTakeOver)
+                {
+                    Destroy(hitObject);
+                    ReplaceObject(heavyPrefab);
+                }
+                else
+                {
+                    ReplaceObject(terrainPrefab);
+                }
+                
+            }
         }
         else if (hitObject.CompareTag("Dead"))
         {

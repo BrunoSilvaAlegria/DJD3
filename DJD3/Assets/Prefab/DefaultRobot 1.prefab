@@ -1399,6 +1399,7 @@ MonoBehaviour:
   shootPoint: {fileID: 6228695212652306899}
   projectileSpeed: 10
   objectToDestroy: {fileID: 9146969224911103723}
+  fuelConsumption: 50
   objectToUntag: {fileID: 8044653046116332223}
 --- !u!114 &7775534041481340727
 MonoBehaviour:
@@ -18045,11 +18046,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ec93ff61214464da99d839bb9f36aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 4
   currentHealth: 0
   canTakeOver: 0
+  healthToTakeOver: 2
   objectToDestroy: {fileID: 8044653046116332223}
   invincible: 0.5
+  fuelPerHit: 25
 --- !u!1 &8106344139937959373
 GameObject:
   m_ObjectHideFlags: 0

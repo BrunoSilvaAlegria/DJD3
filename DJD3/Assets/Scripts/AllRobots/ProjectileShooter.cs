@@ -6,7 +6,14 @@ public class ProjectileShooter : MonoBehaviour
     public Transform shootPoint; // The position where the projectile is instantiated
     public float projectileSpeed = 10f; // Speed of the projectile
     public GameObject objectToDestroy;
+    public int fuelConsumption = 50;
+    private PlayerManager playerManager;
     [SerializeField] private GameObject objectToUntag;
+
+    void Start()
+    {
+        playerManager = FindAnyObjectByType<PlayerManager>();
+    }
 
     void Update()
     {
@@ -18,12 +25,13 @@ public class ProjectileShooter : MonoBehaviour
 
     void Shoot()
     {
-        if (projectilePrefab != null && shootPoint != null)
+        if (projectilePrefab != null && shootPoint != null && playerManager.currentFuel >= fuelConsumption)
         {
             GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
             if (rb != null)
             {
+                playerManager.SpendFuel(fuelConsumption);
                 rb.linearVelocity = shootPoint.forward * projectileSpeed;
                 Destroy(objectToDestroy);
                 if (objectToUntag != null)

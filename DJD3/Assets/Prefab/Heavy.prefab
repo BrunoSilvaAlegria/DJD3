@@ -289,6 +289,7 @@ MonoBehaviour:
   shootPoint: {fileID: 6228695212652306899}
   projectileSpeed: 10
   objectToDestroy: {fileID: 9146969224911103723}
+  fuelConsumption: 50
   objectToUntag: {fileID: 8044653046116332223}
 --- !u!114 &6019162638224531493
 MonoBehaviour:
@@ -310,6 +311,7 @@ MonoBehaviour:
   punchRadius: 0.5
   knockbackDistance: 3
   knockbackDuration: 0.2
+  damage: 1
   robotLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -15052,6 +15054,7 @@ GameObject:
   - component: {fileID: 5971810702758352066}
   - component: {fileID: 8066423007895772514}
   - component: {fileID: 3156865325269958922}
+  - component: {fileID: 1249385429836782350}
   m_Layer: 8
   m_Name: Heavy
   m_TagString: Heavy
@@ -15121,6 +15124,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1.9087502, z: 2}
   m_Center: {x: 0, y: 0.13334292, z: 0}
+--- !u!114 &1249385429836782350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044653046116332223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ec93ff61214464da99d839bb9f36aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 8
+  currentHealth: 0
+  canTakeOver: 0
+  healthToTakeOver: 3
+  objectToDestroy: {fileID: 8044653046116332223}
+  invincible: 0.5
+  fuelPerHit: 40
 --- !u!1 &9146969224911103723
 GameObject:
   m_ObjectHideFlags: 0
@@ -15224,6 +15246,7 @@ MonoBehaviour:
   runCooldown: 4
   knockbackDistance: 20
   knockbackDuration: 0.2
+  damage: 1
 --- !u!135 &5241099477688195661
 SphereCollider:
   m_ObjectHideFlags: 0
