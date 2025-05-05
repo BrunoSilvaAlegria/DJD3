@@ -19935,7 +19935,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4690748979150783682}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Raycast Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24826,7 +24826,7 @@ GameObject:
   - component: {fileID: 2491028259293550164}
   - component: {fileID: 5149195174788403636}
   - component: {fileID: 8439528345137665745}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AiArmLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29811,7 +29811,7 @@ GameObject:
   - component: {fileID: 2955464943095203320}
   - component: {fileID: 3326509622308489095}
   - component: {fileID: 5617639152885445064}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: AiArmRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29922,7 +29922,8 @@ GameObject:
   - component: {fileID: 3577891966763670138}
   - component: {fileID: 1688318855452065978}
   - component: {fileID: 5093995419003071678}
-  m_Layer: 9
+  - component: {fileID: 6099785587950082952}
+  m_Layer: 10
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30059,6 +30060,28 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 128
+  target: {fileID: 0}
+--- !u!135 &6099785587950082952
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5969819447640999708}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6073143360939272143
 GameObject:
   m_ObjectHideFlags: 0

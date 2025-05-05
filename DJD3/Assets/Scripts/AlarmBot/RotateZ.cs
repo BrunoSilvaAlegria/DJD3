@@ -9,4 +9,4 @@ public class RotateZ : MonoBehaviour
         // Rotate around Z axis
         transform.Rotate(0f, 0f, rotationSpeed * Time.deltaTime);
     }
-}
+} 

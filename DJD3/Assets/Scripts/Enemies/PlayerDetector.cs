@@ -5,7 +5,7 @@ public class PlayerDetector : MonoBehaviour
     public float detectionRadius = 10f;
     public LayerMask terrainLayer; // Assign this in the Inspector
 
-    private GameObject target;
+    public GameObject target;
 
     // Public getter for external access
     public GameObject Target => target;
