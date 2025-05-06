@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ChangeCharacter : MonoBehaviour
@@ -7,14 +8,23 @@ public class ChangeCharacter : MonoBehaviour
     public GameObject objectToDestroy;    // Object to destroy when switching
 
     private GameObject targetObjectInTrigger = null;
-    private string targetTag = "";
+    private string targetTag = " ";
 
     public Transform whereToSpawn;
 
     private PlayerManager playerManager;
 
+    private GameObject textToActivate;
+
+    private TextMeshProUGUI textToActivateTMP;
+
+    private string text = "TAKE OVER";
+    
     void Start()
     {
+        textToActivate = GameObject.FindWithTag("TakeOver");
+        textToActivateTMP = textToActivate.GetComponent<TextMeshProUGUI>();
+        textToActivateTMP.SetText(" ");
         playerManager = FindObjectOfType<PlayerManager>();
     }
     void OnTriggerEnter(Collider other)
@@ -23,6 +33,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             targetObjectInTrigger = other.gameObject;
             targetTag = other.tag;
+            textToActivateTMP.SetText(text);
         }
     }
 
@@ -32,6 +43,7 @@ public class ChangeCharacter : MonoBehaviour
         {
             targetObjectInTrigger = null;
             targetTag = "";
+            textToActivateTMP.SetText(" ");
         }
     }
 
@@ -39,17 +51,18 @@ public class ChangeCharacter : MonoBehaviour
     {
         if (targetObjectInTrigger != null && Input.GetKeyDown(KeyCode.C))
         {
+            textToActivateTMP.SetText(" ");
             GameObject replacementPrefab = null;
-
+            RobotStatus robotStatus = targetObjectInTrigger.GetComponent<RobotStatus>();
             if (targetTag == "Default")
             {
-                playerManager.currentHealth = 3;
+                playerManager.currentHealth = robotStatus.currentHealth;
                 replacementPrefab = defaultReplacement;
                 Debug.Log("Switching Default character");
             }
             else if (targetTag == "Heavy")
             {
-                playerManager.currentHealth = 5;
+                playerManager.currentHealth = robotStatus.currentHealth;
                 replacementPrefab = heavyReplacement;
                 Debug.Log("Switching Heavy character");
             }
