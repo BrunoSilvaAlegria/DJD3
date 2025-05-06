@@ -11,7 +11,12 @@ public class ChangeCharacter : MonoBehaviour
 
     public Transform whereToSpawn;
 
+    private PlayerManager playerManager;
 
+    void Start()
+    {
+        playerManager = FindObjectOfType<PlayerManager>();
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Default") || other.CompareTag("Heavy"))
@@ -38,11 +43,13 @@ public class ChangeCharacter : MonoBehaviour
 
             if (targetTag == "Default")
             {
+                playerManager.currentHealth = 3;
                 replacementPrefab = defaultReplacement;
                 Debug.Log("Switching Default character");
             }
             else if (targetTag == "Heavy")
             {
+                playerManager.currentHealth = 5;
                 replacementPrefab = heavyReplacement;
                 Debug.Log("Switching Heavy character");
             }

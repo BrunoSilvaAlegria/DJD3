@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     public GameObject defaultPrefab;
     public GameObject heavyPrefab;
     public Transform whereToSpawn;
+    private PlayerManager playerManager;
 
     public float launchForce = 20f; // Speed of the projectile
 
@@ -14,6 +15,7 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
+        playerManager = FindObjectOfType<PlayerManager>();
         rb = GetComponent<Rigidbody>();
 
         if (whereToSpawn != null)
@@ -34,6 +36,7 @@ public class Projectile : MonoBehaviour
 
         if (hitObject.layer == terrainLayer)
         {
+            playerManager.currentHealth = 1;
             Debug.Log("Hit terrain");
             ReplaceObject(terrainPrefab);
         }
@@ -45,11 +48,13 @@ public class Projectile : MonoBehaviour
                 RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
                 if (enemy.canTakeOver)
                 {
+                    playerManager.currentHealth = 3;
                     Destroy(hitObject);
                     ReplaceObject(defaultPrefab);
                 }
                 else
                 {
+                    playerManager.currentHealth = 1;
                     ReplaceObject(terrainPrefab);
                 }
                 
@@ -63,11 +68,13 @@ public class Projectile : MonoBehaviour
                 RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
                 if (enemy.canTakeOver)
                 {
+                    playerManager.currentHealth = 5;
                     Destroy(hitObject);
                     ReplaceObject(heavyPrefab);
                 }
                 else
                 {
+                    playerManager.currentHealth = 1;
                     ReplaceObject(terrainPrefab);
                 }
                 
