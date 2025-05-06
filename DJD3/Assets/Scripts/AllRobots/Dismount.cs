@@ -10,20 +10,23 @@ public class Dismount : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerManager = FindObjectOfType<PlayerManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.C))
+        if(Input.GetKeyDown(KeyCode.V))
         {
             GameObject projectile = Instantiate(hand, whereToSpawn.position, whereToSpawn.rotation);
             playerManager.currentHealth = 1;
+            
+            if (objectToUntag != null)
+            {
+                //objectToUntag.tag = "Dead";
+                //objectToUntag.layer = LayerMask.NameToLayer("Robot");
+            }
             Destroy(objectToDestroy);
-                if (objectToUntag != null)
-                    objectToUntag.tag = "Dead";
-                    objectToUntag.layer = LayerMask.NameToLayer("Robot");
         }
     }
 }

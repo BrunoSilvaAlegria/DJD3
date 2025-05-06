@@ -35,12 +35,17 @@ public class PlayerManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            SpendHealth(1);
+            SpendHealth(10);
         }
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            GainHealth(1);
+            GainHealth(10);
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GainFuel(100);
         }
     }
 

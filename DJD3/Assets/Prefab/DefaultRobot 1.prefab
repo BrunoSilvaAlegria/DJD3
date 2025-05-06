@@ -16357,7 +16357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &991580358882879861
 Transform:
   m_ObjectHideFlags: 0
@@ -18275,7 +18275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6966940564211706084
 Transform:
   m_ObjectHideFlags: 0
@@ -19092,6 +19092,7 @@ GameObject:
   - component: {fileID: 5316032788537202985}
   - component: {fileID: 3942679363679719223}
   - component: {fileID: 6761736409992043116}
+  - component: {fileID: 6474839125207363317}
   - component: {fileID: 424244900239838802}
   - component: {fileID: 4518205836648125713}
   - component: {fileID: 6105769169123717540}
@@ -19167,6 +19168,20 @@ MonoBehaviour:
   robotLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &6474839125207363317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146969224911103723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0603b90219527c844aad01c529237274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectA: {fileID: 7705022917589542152}
+  objectB: {fileID: 3723968762586675538}
 --- !u!114 &424244900239838802
 MonoBehaviour:
   m_ObjectHideFlags: 0
