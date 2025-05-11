@@ -619,8 +619,8 @@ MonoBehaviour:
   healthToTakeOver: 2
   objectToDestroy: {fileID: 1298843674692623241}
   invincible: 0.5
-  fuelPerHit: 25
-  timeTillHit: 5
+  fuelPerHit: 10
+  timeTillHit: 4
   burnTimer: 3
   burningDamage: 2
   initialBurningDamage: 1
@@ -2736,6 +2736,7 @@ MonoBehaviour:
   robotLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDelay: 3
 --- !u!1 &5170680729878106443
 GameObject:
   m_ObjectHideFlags: 0

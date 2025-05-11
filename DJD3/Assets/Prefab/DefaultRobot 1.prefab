@@ -18891,6 +18891,7 @@ MonoBehaviour:
   robotLayer:
     serializedVersion: 2
     m_Bits: 256
+  burnDelay: 1
 --- !u!1 &8756242510185102432
 GameObject:
   m_ObjectHideFlags: 0
@@ -19195,12 +19196,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 8044653046116332223}
-  _gravityAcceleration: -30
-  _maxFallSpeed: 30
+  _gravityAcceleration: -90
+  _maxFallSpeed: 90
   _maxForwardSpeed: 6
   _maxBackwardSpeed: 5
   _maxStrafeSpeed: 6
-  _jumpSpeed: 15
+  _jumpSpeed: 30
 --- !u!54 &4518205836648125713
 Rigidbody:
   m_ObjectHideFlags: 0
