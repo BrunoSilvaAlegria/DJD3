@@ -10,6 +10,7 @@ public class Projectile : MonoBehaviour
     private PlayerManager playerManager;
 
     public float launchForce = 20f; // Speed of the projectile
+    public float rotationSpeed = 100f; // How quickly it rotates with the mouse
 
     private Rigidbody rb;
 
@@ -17,6 +18,7 @@ public class Projectile : MonoBehaviour
     {
         playerManager = FindObjectOfType<PlayerManager>();
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
 
         if (whereToSpawn != null)
         {
@@ -27,6 +29,32 @@ public class Projectile : MonoBehaviour
         {
             Debug.LogWarning("Spawn point not set on projectile.");
         }
+    }
+
+    private void Update()
+    {
+        // Get mouse input
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Calculate yaw and pitch
+        float yaw = mouseX * rotationSpeed * Time.deltaTime;
+        float pitch = -mouseY * rotationSpeed * Time.deltaTime;
+
+        // Apply pitch (around X) and yaw (around Y) only
+        transform.Rotate(pitch, yaw, 0f, Space.Self);
+
+        // Lock roll (Z) rotation
+        Vector3 euler = transform.eulerAngles;
+        euler.z = 0f;
+        transform.eulerAngles = euler;
+    }
+
+
+    private void FixedUpdate()
+    {
+        // Maintain constant forward velocity
+        rb.linearVelocity = transform.forward * launchForce;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -43,9 +71,9 @@ public class Projectile : MonoBehaviour
         else if (hitObject.CompareTag("Default"))
         {
             Debug.Log("Hit default tagged object");
-            if (hitObject.GetComponent<RobotStatus>() != null)
+            RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
+            if (enemy != null)
             {
-                RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
                 if (enemy.canTakeOver)
                 {
                     playerManager.currentHealth = 3;
@@ -57,15 +85,14 @@ public class Projectile : MonoBehaviour
                     playerManager.currentHealth = 1;
                     ReplaceObject(terrainPrefab);
                 }
-                
             }
         }
         else if (hitObject.CompareTag("Heavy"))
         {
-            Debug.Log("Hit default tagged object");
-            if (hitObject.GetComponent<RobotStatus>() != null)
+            Debug.Log("Hit heavy tagged object");
+            RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
+            if (enemy != null)
             {
-                RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
                 if (enemy.canTakeOver)
                 {
                     playerManager.currentHealth = 5;
@@ -77,7 +104,6 @@ public class Projectile : MonoBehaviour
                     playerManager.currentHealth = 1;
                     ReplaceObject(terrainPrefab);
                 }
-                
             }
         }
         else if (hitObject.CompareTag("Dead"))
@@ -90,7 +116,7 @@ public class Projectile : MonoBehaviour
             Debug.Log("Hit unknown object");
         }
 
-        Destroy(gameObject); // Destroy the projectile
+        Destroy(gameObject); // Destroy the projectile after collision
     }
 
     private void ReplaceObject(GameObject prefab)

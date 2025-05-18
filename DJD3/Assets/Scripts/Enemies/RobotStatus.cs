@@ -32,12 +32,13 @@ public class RobotStatus : MonoBehaviour
         fire.active = false;
         currentHealth = maxHealth;
         playerManager = FindAnyObjectByType<PlayerManager>();
+        canTakeOver = true;
     }
 
     void Update()
     {
-        if (currentHealth <= healthToTakeOver)
-            canTakeOver = true;
+        //if (currentHealth <= healthToTakeOver)
+            //canTakeOver = true;
     }
 
     public void GetHit(int damage)

@@ -16357,7 +16357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &991580358882879861
 Transform:
   m_ObjectHideFlags: 0
@@ -16388,7 +16388,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 984442484875237259, guid: f0b529942ef881c42bcb487885008cb3, type: 3}
   shootPoint: {fileID: 6228695212652306899}
   projectileSpeed: 10
-  objectToDestroy: {fileID: 9146969224911103723}
+  objectToDestroy: {fileID: 8044653046116332223}
   fuelConsumption: 50
   objectToUntag: {fileID: 8044653046116332223}
 --- !u!1 &3775833873512862396
@@ -18275,7 +18275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6966940564211706084
 Transform:
   m_ObjectHideFlags: 0
@@ -18562,7 +18562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ec93ff61214464da99d839bb9f36aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
+  maxHealth: 10000
   currentHealth: 0
   canTakeOver: 0
   healthToTakeOver: 2
