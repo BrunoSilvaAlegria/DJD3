@@ -11,8 +11,10 @@ public class Projectile : MonoBehaviour
 
     public float launchForce = 20f; // Speed of the projectile
     public float rotationSpeed = 100f; // How quickly it rotates with the mouse
+    public int drainAmount;
 
     private Rigidbody rb;
+
 
     private void Start()
     {
@@ -33,6 +35,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
+
         // Get mouse input
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
@@ -50,11 +53,19 @@ public class Projectile : MonoBehaviour
         transform.eulerAngles = euler;
     }
 
-
     private void FixedUpdate()
     {
         // Maintain constant forward velocity
         rb.linearVelocity = transform.forward * launchForce;
+        if (playerManager != null && playerManager.currentFuel > 0)
+        {
+            playerManager.SpendFuel(drainAmount);
+        }
+
+        if (playerManager.currentFuel <= 0)
+        {
+            ReplaceObject(terrainPrefab);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -74,7 +85,7 @@ public class Projectile : MonoBehaviour
             RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
             if (enemy != null)
             {
-                if (enemy.canTakeOver)
+                /*if (enemy.canTakeOver)
                 {
                     playerManager.currentHealth = 3;
                     Destroy(hitObject);
@@ -84,7 +95,8 @@ public class Projectile : MonoBehaviour
                 {
                     playerManager.currentHealth = 1;
                     ReplaceObject(terrainPrefab);
-                }
+                }*/
+                Destroy(hitObject);
             }
         }
         else if (hitObject.CompareTag("Heavy"))
@@ -116,7 +128,34 @@ public class Projectile : MonoBehaviour
             Debug.Log("Hit unknown object");
         }
 
-        Destroy(gameObject); // Destroy the projectile after collision
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject hitObject = other.gameObject;
+        if (hitObject.CompareTag("Default"))
+        {
+            Debug.Log("Hit default tagged object");
+            RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
+            if (enemy != null)
+            {
+                /*if (enemy.canTakeOver)
+                {
+                    playerManager.currentHealth = 3;
+                    Destroy(hitObject);
+                    ReplaceObject(defaultPrefab);
+                }
+                else
+                {
+                    playerManager.currentHealth = 1;
+                    ReplaceObject(terrainPrefab);
+                }*/
+                playerManager.currentFuel += 35;
+                Destroy(hitObject);
+            }
+        }
+
     }
 
     private void ReplaceObject(GameObject prefab)
@@ -124,6 +163,7 @@ public class Projectile : MonoBehaviour
         if (prefab != null && whereToSpawn != null)
         {
             Instantiate(prefab, whereToSpawn.position, prefab.transform.rotation);
+            Destroy(gameObject);
         }
     }
 }
