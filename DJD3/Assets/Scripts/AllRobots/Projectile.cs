@@ -151,7 +151,7 @@ public class Projectile : MonoBehaviour
                     playerManager.currentHealth = 1;
                     ReplaceObject(terrainPrefab);
                 }*/
-                playerManager.currentFuel += 35;
+                playerManager.currentFuel += 50;
                 Destroy(hitObject);
             }
         }
