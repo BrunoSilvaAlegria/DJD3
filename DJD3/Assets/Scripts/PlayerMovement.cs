@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxBackwardSpeed;
     [SerializeField] private float _maxStrafeSpeed;
     [SerializeField] private float _jumpSpeed;
+    [SerializeField] private Animator animator;
 
     private CharacterController _controller;
     private Vector3 _velocityHor;
@@ -61,7 +62,11 @@ public class PlayerMovement : MonoBehaviour
     private void CheckForJump()
     {
         if (Input.GetButtonDown("Jump") && _controller.isGrounded)
+        {
+            animator.SetTrigger("jump");
             _jump = true;
+        }
+            
     }
 
     void FixedUpdate()
@@ -80,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (forwardAxis > 0f)
         {
+            animator.SetTrigger("walk");
             _velocityHor.z = forwardAxis * _maxForwardSpeed;
             if (_velocityHor.magnitude > _maxForwardSpeed)
                 _velocityHor = _velocityHor.normalized * _maxForwardSpeed;
@@ -100,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_jump)
         {
+            
             _velocityVer.y = _jumpSpeed;
             _jump = false;
         }
@@ -109,6 +116,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (_velocityVer.y > -_maxFallSpeed)
         {
+            //animator.SetTrigger("fall");
             _velocityVer.y += _gravityAcceleration * Time.fixedDeltaTime;
             _velocityVer.y = Mathf.Max(_velocityVer.y, -_maxFallSpeed);
         }

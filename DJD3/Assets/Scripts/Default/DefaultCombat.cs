@@ -5,6 +5,7 @@ using System;
 public class DefaultCombat : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    [SerializeField] private Animator defaultAnimator;
     [SerializeField] private float punchCooldown = 1f; // Cooldown time in seconds
     [SerializeField] private bool isAttacking = false;
     public Transform punchOrigin; // Assign to the punch point (e.g., hand)
@@ -20,6 +21,7 @@ public class DefaultCombat : MonoBehaviour
         {
             isAttacking = true;
             animator.SetTrigger("DoublePunching");
+            defaultAnimator.SetTrigger("push");
             StartCoroutine(DoublePunchCooldown()); // Start cooldown immediately
         }
     }
