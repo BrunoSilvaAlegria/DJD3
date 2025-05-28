@@ -11,7 +11,7 @@ public class CheckpointTrigger : MonoBehaviour
 
         if (checkpointManager == null)
         {
-            Debug.LogError("CheckpointManager not found in the scene.");
+            Debug.Log("CheckpointManager not found in the scene.");
         }
         else
         {
