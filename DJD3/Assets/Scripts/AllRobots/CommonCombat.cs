@@ -5,6 +5,7 @@ using System;
 public class CommonCombat : MonoBehaviour
 {
     public Animator animator;
+    public Animator defaultAnimator;
     public float punchCooldown = 0.5f;
     [SerializeField] private bool isAttacking = false;
     public PlayerMovement playerMovement; // Assign in Inspector
@@ -21,6 +22,7 @@ public class CommonCombat : MonoBehaviour
         {
             isAttacking = true;
             animator.SetTrigger("Punching");
+            defaultAnimator.SetTrigger("punch");
             StartCoroutine(PunchCooldown());
         }
     }
