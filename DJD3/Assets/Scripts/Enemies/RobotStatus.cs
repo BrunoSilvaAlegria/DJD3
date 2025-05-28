@@ -24,6 +24,7 @@ public class RobotStatus : MonoBehaviour
     public int initialBurningDamage = 2;
 
     public GameObject fire;
+    public GameObject smoke;
 
     private Coroutine burnCoroutine;
 
@@ -32,13 +33,17 @@ public class RobotStatus : MonoBehaviour
         fire.active = false;
         currentHealth = maxHealth;
         playerManager = FindAnyObjectByType<PlayerManager>();
-        canTakeOver = true;
+        canTakeOver = false;
     }
 
     void Update()
     {
-        //if (currentHealth <= healthToTakeOver)
-            //canTakeOver = true;
+        if (currentHealth <= healthToTakeOver)
+        {
+            canTakeOver = true;
+            smoke.active = true;
+        }
+
     }
 
     public void GetHit(int damage)

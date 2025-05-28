@@ -85,17 +85,12 @@ public class Projectile : MonoBehaviour
             RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
             if (enemy != null)
             {
-                /*if (enemy.canTakeOver)
+                if (!enemy.canTakeOver)
                 {
                     playerManager.currentHealth = 3;
                     Destroy(hitObject);
                     ReplaceObject(defaultPrefab);
                 }
-                else
-                {
-                    playerManager.currentHealth = 1;
-                    ReplaceObject(terrainPrefab);
-                }*/
                 Destroy(hitObject);
             }
         }
@@ -138,7 +133,7 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log("Hit default tagged object");
             RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
-            if (enemy != null)
+            if (enemy.canTakeOver)
             {
                 /*if (enemy.canTakeOver)
                 {
