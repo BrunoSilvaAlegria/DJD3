@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
+    public Animator animator;
     public float detectionRadius = 10f;
     public LayerMask terrainLayer; // Assign this in the Inspector
 
@@ -28,6 +29,7 @@ public class PlayerDetector : MonoBehaviour
                 if (!Physics.Linecast(transform.position, hit.transform.position, terrainLayer))
                 {
                     target = hit.gameObject;
+                    animator.SetBool("walk", true);
                     return;
                 }
             }

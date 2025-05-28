@@ -7,10 +7,10 @@ public class AICombat : MonoBehaviour
 
     private PlayerManager playerManager;
     private float timer;
+    private bool inRange = false;
 
     void Start()
     {
-        // Find the PlayerManager in the scene
         playerManager = FindObjectOfType<PlayerManager>();
 
         if (playerManager == null)
@@ -21,6 +21,33 @@ public class AICombat : MonoBehaviour
 
     public void PerformHit()
     {
-        playerManager.SpendHealth(damageAmount);
+        if (inRange)
+        {
+            playerManager.SpendHealth(damageAmount);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = true;
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = false;
+        }
     }
 }
