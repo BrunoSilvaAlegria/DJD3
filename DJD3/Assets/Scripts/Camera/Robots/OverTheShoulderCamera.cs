@@ -12,6 +12,7 @@ public class OverTheShoulderCamera : MonoBehaviour
     public float smoothSpeed = 5.0f;
     public LayerMask obstacleLayers;
     public LayerMask excludedLayers;
+    public Animator animator;
 
     [Header("Aiming Settings")]
     public float aimDistance = 2.0f;
@@ -34,6 +35,7 @@ public class OverTheShoulderCamera : MonoBehaviour
     private bool isScriptEnabled = false;
     private bool wasAiming = false;
     private float originalXRotation;
+
 
     void Start()
     {
@@ -72,12 +74,15 @@ public class OverTheShoulderCamera : MonoBehaviour
                 Vector3 currentEuler = objectToRotateWithCamera.eulerAngles;
                 currentEuler.x = pitch;
                 objectToRotateWithCamera.rotation = Quaternion.Euler(currentEuler);
+                animator.SetBool("isAiming", true);
+
             }
             else if (wasAiming) // Just stopped aiming
             {
                 Vector3 currentEuler = objectToRotateWithCamera.eulerAngles;
                 currentEuler.x = originalXRotation;
                 objectToRotateWithCamera.rotation = Quaternion.Euler(currentEuler);
+                animator.SetBool("isAiming", false);
             }
         }
 

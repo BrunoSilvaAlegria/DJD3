@@ -889,10 +889,11 @@ MonoBehaviour:
   excludedLayers:
     serializedVersion: 2
     m_Bits: 256
+  animator: {fileID: 6449313931954743176}
   aimDistance: 2
   aimShoulderOffset: 0.6
   aimSensitivity: 1
-  objectToRotateWithCamera: {fileID: 2283827745845255397}
+  objectToRotateWithCamera: {fileID: 7838243651404297962}
   objectToToggleWhileAiming: {fileID: 4936765469598870370}
 --- !u!1 &858506939448025175
 GameObject:
@@ -18183,7 +18184,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3828664972306108323}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: f4effc508f39a3940875031530df9d1f, type: 3}
   m_Controller: {fileID: 9100000, guid: 31f1764a709c3404f874bacf4c030cf0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0

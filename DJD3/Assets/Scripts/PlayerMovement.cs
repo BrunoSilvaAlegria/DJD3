@@ -102,6 +102,19 @@ public class PlayerMovement : MonoBehaviour
             _velocityHor.z = forwardAxis * _maxBackwardSpeed;
             if (_velocityHor.magnitude > _maxBackwardSpeed)
                 _velocityHor = _velocityHor.normalized * _maxBackwardSpeed;
+            if (_controller.isGrounded)
+            {
+                animator.SetBool("isIdle", false);
+                animator.SetBool("walk", true);
+            }
+        }
+        else if (_velocityHor.x != 0)
+        {
+            if (_controller.isGrounded)
+            {
+                animator.SetBool("isIdle", false);
+                animator.SetBool("walk", true);
+            }
         }
         else
         {
