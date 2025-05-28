@@ -18038,7 +18038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &991580358882879861
 Transform:
   m_ObjectHideFlags: 0
@@ -19534,7 +19534,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6880757142090509444
 Transform:
   m_ObjectHideFlags: 0
@@ -23077,7 +23077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6966940564211706084
 Transform:
   m_ObjectHideFlags: 0
@@ -24882,10 +24882,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObject: {fileID: 8044653046116332223}
   _gravityAcceleration: -90
-  _maxFallSpeed: 90
-  _maxForwardSpeed: 6
-  _maxBackwardSpeed: 5
-  _maxStrafeSpeed: 6
+  _maxFallSpeed: 60
+  _maxForwardSpeed: 8
+  _maxBackwardSpeed: 7
+  _maxStrafeSpeed: 8
   _jumpSpeed: 30
   animator: {fileID: 6449313931954743176}
 --- !u!54 &4518205836648125713

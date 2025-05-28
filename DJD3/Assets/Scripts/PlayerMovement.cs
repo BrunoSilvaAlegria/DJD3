@@ -141,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("walk", false);
             animator.SetBool("isIdle", false);
-            if (_velocityVer.y <0)
+            if (_velocityVer.y <-10)
             {
                 animator.SetTrigger("fall");   
             }
