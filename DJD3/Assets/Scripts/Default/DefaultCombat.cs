@@ -4,7 +4,7 @@ using System;
 
 public class DefaultCombat : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    //[SerializeField] private Animator animator;
     [SerializeField] private Animator defaultAnimator;
     [SerializeField] private float punchCooldown = 1f; // Cooldown time in seconds
     [SerializeField] private bool isAttacking = false;
@@ -20,8 +20,9 @@ public class DefaultCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q) && !isAttacking)
         {
             isAttacking = true;
-            animator.SetTrigger("DoublePunching");
+            //animator.SetTrigger("DoublePunching");
             defaultAnimator.SetTrigger("push");
+            OnDoublePunchEnd();
             StartCoroutine(DoublePunchCooldown()); // Start cooldown immediately
         }
     }
@@ -29,7 +30,7 @@ public class DefaultCombat : MonoBehaviour
     // This function is called at the end of the punch animation using an Animation Event
     public void OnDoublePunchEnd()
     {
-        animator.SetTrigger("ArmsReturning"); // Play the return animation
+        //animator.SetTrigger("ArmsReturning"); // Play the return animation
 
         // Check for any colliders in the Robot layer within punchRadius
         Collider[] hits = Physics.OverlapSphere(punchOrigin.position, punchRadius, robotLayer);

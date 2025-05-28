@@ -18477,7 +18477,7 @@ Transform:
   m_GameObject: {fileID: 4189733583836896443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.245, z: 1.682}
+  m_LocalPosition: {x: 0, y: 0.245, z: 1.993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24842,12 +24842,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2db2bf1c2ef6c478f21c319fe100b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3942679363679719223}
   defaultAnimator: {fileID: 6449313931954743176}
   punchCooldown: 1
   isAttacking: 0
   punchOrigin: {fileID: 1491566883691171762}
-  punchRadius: 0.4
+  punchRadius: 0.57
   knockbackDistance: 5
   knockbackDuration: 0.2
   damage: 1

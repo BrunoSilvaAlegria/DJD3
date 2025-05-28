@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private Animator animator;
 
+    private AnimatorStateInfo currentState;
     private CharacterController _controller;
     private Vector3 _velocityHor;
     private Vector3 _velocityVer;
@@ -19,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        currentState = animator.GetCurrentAnimatorStateInfo(0);
         if (targetObject == null)
         {
             Debug.LogError("Target Object not assigned!");
@@ -85,7 +87,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (forwardAxis > 0f)
         {
-            animator.SetTrigger("walk");
+            if (_controller.isGrounded)
+            {
+                animator.SetBool("isIdle", false);
+                animator.SetBool("walk", true);
+            }
+
             _velocityHor.z = forwardAxis * _maxForwardSpeed;
             if (_velocityHor.magnitude > _maxForwardSpeed)
                 _velocityHor = _velocityHor.normalized * _maxForwardSpeed;
@@ -99,6 +106,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _velocityHor.z = 0f;
+            animator.SetBool("walk", false);
+
+            animator.SetBool("isIdle", true);
         }
     }
 
@@ -116,7 +126,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (_velocityVer.y > -_maxFallSpeed)
         {
-            //animator.SetTrigger("fall");
+            animator.SetBool("walk", false);
+            animator.SetBool("isIdle", false);
+            if (_velocityVer.y <0)
+            {
+                animator.SetTrigger("fall");   
+            }
             _velocityVer.y += _gravityAcceleration * Time.fixedDeltaTime;
             _velocityVer.y = Mathf.Max(_velocityVer.y, -_maxFallSpeed);
         }
