@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6160060116375445193
 Transform:
@@ -185,6 +185,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -3133498875991405556, guid: 51f0774b2c127e246b7882cb900ae5b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -2859109400176981367, guid: 51f0774b2c127e246b7882cb900ae5b5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -200,6 +204,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 51f0774b2c127e246b7882cb900ae5b5, type: 3}
       propertyPath: m_Name
       value: Street_Lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 51f0774b2c127e246b7882cb900ae5b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8934777400606672865, guid: 51f0774b2c127e246b7882cb900ae5b5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
