@@ -917,6 +917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1575763899977130472}
+  - component: {fileID: 2198612547314711111}
   m_Layer: 0
   m_Name: Metal_Crate
   m_TagString: Untagged
@@ -941,6 +942,27 @@ Transform:
   - {fileID: 6653530009201668293}
   m_Father: {fileID: 4786149158487987553}
   m_LocalEulerAnglesHint: {x: 0, y: 15.913, z: 0}
+--- !u!65 &2198612547314711111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474132004120552937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 60, y: 61, z: 60}
+  m_Center: {x: 0, y: 28.75, z: 0}
 --- !u!1 &1502801792019513037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1203,7 @@ GameObject:
   - component: {fileID: 2107115351376830211}
   - component: {fileID: 740215864768975986}
   - component: {fileID: 5672070266401770888}
+  - component: {fileID: 3302865110062308705}
   m_Layer: 0
   m_Name: Metal_Barrel (1)
   m_TagString: Untagged
@@ -1256,6 +1279,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3302865110062308705
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964206099969479067}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 81.03533, y: 100.00001, z: 81.0353}
+  m_Center: {x: 0.00023078918, y: 48.000126, z: -0.00025177002}
 --- !u!1 &2561121773503274249
 GameObject:
   m_ObjectHideFlags: 0
@@ -3760,6 +3804,7 @@ GameObject:
   - component: {fileID: 7540785925236996629}
   - component: {fileID: 3165855280717088033}
   - component: {fileID: 7139879230669699249}
+  - component: {fileID: 4909729672803446895}
   m_Layer: 0
   m_Name: Gas_Cylinder
   m_TagString: Untagged
@@ -3835,6 +3880,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4909729672803446895
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5159347263646270180}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 42.605785, y: 82.033936, z: 46.415234}
+  m_Center: {x: -0.0004825592, y: 32.131203, z: 0.00025749207}
 --- !u!1 &5357402531504358845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4735,6 +4801,7 @@ GameObject:
   - component: {fileID: 6407168807045415437}
   - component: {fileID: 7743267005628894275}
   - component: {fileID: 7590664168031200341}
+  - component: {fileID: 8914073028690356475}
   m_Layer: 0
   m_Name: Metal_Barrel (2)
   m_TagString: Untagged
@@ -4810,6 +4877,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8914073028690356475
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6754311318335158234}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 81.03536, y: 100.00007, z: 81.03532}
+  m_Center: {x: 0.00046777725, y: 47.999966, z: -0.00024926662}
 --- !u!1 &6972627414560870391
 GameObject:
   m_ObjectHideFlags: 0
@@ -5485,6 +5573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7179090850506119238}
+  - component: {fileID: 1873208955576214640}
   m_Layer: 0
   m_Name: Metal_Crate (2)
   m_TagString: Untagged
@@ -5509,6 +5598,27 @@ Transform:
   - {fileID: 8149850841068630402}
   m_Father: {fileID: 4786149158487987553}
   m_LocalEulerAnglesHint: {x: 0, y: -123.293, z: 90}
+--- !u!65 &1873208955576214640
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853737279121480742}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 60, y: 61, z: 60}
+  m_Center: {x: 0, y: 28.75, z: 0}
 --- !u!1 &7872310653893232267
 GameObject:
   m_ObjectHideFlags: 0

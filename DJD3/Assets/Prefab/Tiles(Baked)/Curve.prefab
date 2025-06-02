@@ -2398,6 +2398,7 @@ GameObject:
   - component: {fileID: 9201204214316766107}
   - component: {fileID: 6775014275685334513}
   - component: {fileID: 7230541438442401146}
+  - component: {fileID: 4989674349296341565}
   m_Layer: 0
   m_Name: Metal_Barrel
   m_TagString: Untagged
@@ -2473,6 +2474,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &4989674349296341565
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5152308523820213275}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 81.03532, y: 100.00001, z: 81.035286}
+  m_Center: {x: -0.000013351442, y: 47.999516, z: 0.0009689331}
 --- !u!1 &5154417487010471690
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,6 +3469,7 @@ GameObject:
   - component: {fileID: 3765611238615906999}
   - component: {fileID: 1461460080592177775}
   - component: {fileID: 1792704607628695614}
+  - component: {fileID: 6820617564560605011}
   m_Layer: 0
   m_Name: Gas_Cylinder
   m_TagString: Untagged
@@ -3522,6 +3545,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6820617564560605011
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7427431327016104790}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 42.60578, y: 82.033936, z: 46.41523}
+  m_Center: {x: 0.001958847, y: 32.131203, z: 0.000013351442}
 --- !u!1 &7633921096009187179
 GameObject:
   m_ObjectHideFlags: 0
@@ -4134,6 +4178,7 @@ GameObject:
   - component: {fileID: 4112834954818518381}
   - component: {fileID: 764706220821687593}
   - component: {fileID: 4458582266341829942}
+  - component: {fileID: 2194226424522302087}
   m_Layer: 0
   m_Name: Gas_Cylinder (1)
   m_TagString: Untagged
@@ -4209,6 +4254,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2194226424522302087
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738894428675422299}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 42.605793, y: 82.03396, z: 46.41524}
+  m_Center: {x: 0.0000018917078, y: 32.13414, z: -0.0003528595}
 --- !u!1 &8963393003652257204
 GameObject:
   m_ObjectHideFlags: 0
