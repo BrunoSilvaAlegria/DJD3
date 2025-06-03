@@ -70,11 +70,11 @@ MonoBehaviour:
       m_Values: []
     m_Asset: {fileID: 0}
   chunkSizeInBricks: 128
-  maxCellPosition: {x: 7, y: 4, z: 0}
-  minCellPosition: {x: -7, y: 0, z: -10}
+  maxCellPosition: {x: 3, y: 3, z: -2}
+  minCellPosition: {x: -4, y: 1, z: -8}
   globalBounds:
-    m_Center: {x: 0, y: 162, z: -405}
-    m_Extent: {x: 567, y: 162, z: 405}
+    m_Center: {x: -40.5, y: 162, z: -405}
+    m_Extent: {x: 283.5, y: 81, z: 243}
   bakedSimplificationLevels: 3
   bakedMinDistanceBetweenProbes: 1
   bakedProbeOcclusion: 1
@@ -87,7 +87,7 @@ MonoBehaviour:
     y: 0
     z: 0
     w: 0
-  maxSHChunkCount: 37
+  maxSHChunkCount: 42
   L0ChunkSize: 65536
   L1ChunkSize: 32768
   L2TextureChunkSize: 32768
