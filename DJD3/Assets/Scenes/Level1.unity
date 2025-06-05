@@ -36240,6 +36240,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1752568228}
     m_Modifications:
+    - target: {fileID: 1277410551732103851, guid: ed27b3b4e19cdfa44ae953b6869d9938, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1296246832433970340, guid: ed27b3b4e19cdfa44ae953b6869d9938, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -86688,7 +86692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4398632490885377877, guid: 92fd1b0be9949814c9c37e273f9d027f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -24.6
+      value: -32.9
       objectReference: {fileID: 0}
     - target: {fileID: 4398632490885377877, guid: 92fd1b0be9949814c9c37e273f9d027f, type: 3}
       propertyPath: m_LocalPosition.z
