@@ -2884,8 +2884,7 @@ Transform:
   m_LocalPosition: {x: 0.508, y: 0.21399999, z: 0.06}
   m_LocalScale: {x: 0.18972911, y: 0.23664, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6228695212652306899}
+  m_Children: []
   m_Father: {fileID: 5316032788537202985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2910464900473662347
@@ -2979,8 +2978,8 @@ MonoBehaviour:
   punchCooldown: 0.5
   isAttacking: 0
   playerMovement: {fileID: 424244900239838802}
-  punchOrigin: {fileID: 6228695212652306899}
-  punchRadius: 0.4
+  punchOrigin: {fileID: 1491566883691171762}
+  punchRadius: 0.44
   knockbackDistance: 2
   knockbackDuration: 0.1
   damage: 1
@@ -18478,7 +18477,7 @@ Transform:
   m_GameObject: {fileID: 4189733583836896443}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.245, z: 1.993}
+  m_LocalPosition: {x: 0.058, y: 0.179, z: 0.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18741,6 +18740,7 @@ Transform:
   - {fileID: 3578535590283412107}
   - {fileID: 5372279490456847481}
   - {fileID: 5883325862315431430}
+  - {fileID: 6228695212652306899}
   m_Father: {fileID: 1103990465250851051}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4406138303795586270
@@ -21301,13 +21301,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6073143360939272143}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.673}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0.43457937, y: -0.59676135, z: -0.5229968, w: 0.42601752}
+  m_LocalPosition: {x: -0, y: 0.00076, z: -0}
+  m_LocalScale: {x: 0.001897289, y: 0.002366399, z: 0.009999997}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2283827745845255397}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 5963333363401570765}
+  m_LocalEulerAnglesHint: {x: -96.02, y: 30.923996, z: 224.16501}
 --- !u!1 &6075474103970746851
 GameObject:
   m_ObjectHideFlags: 0
@@ -24849,7 +24849,7 @@ MonoBehaviour:
   punchCooldown: 1
   isAttacking: 0
   punchOrigin: {fileID: 1491566883691171762}
-  punchRadius: 0.57
+  punchRadius: 0.53
   knockbackDistance: 5
   knockbackDuration: 0.2
   damage: 1
