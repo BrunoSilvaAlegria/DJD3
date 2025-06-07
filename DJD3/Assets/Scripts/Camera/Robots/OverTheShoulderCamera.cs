@@ -36,6 +36,8 @@ public class OverTheShoulderCamera : MonoBehaviour
     private bool wasAiming = false;
     private float originalXRotation;
 
+    private Vector3 defaultLocalPosition;
+    private Quaternion defaultLocalRotation;
 
     void Start()
     {
@@ -47,48 +49,57 @@ public class OverTheShoulderCamera : MonoBehaviour
         currentSensitivity = sensitivity;
 
         if (objectToToggleWhileAiming)
-            objectToToggleWhileAiming.active = false;
+        {
+            objectToToggleWhileAiming.SetActive(false);
+            defaultLocalPosition = objectToToggleWhileAiming.transform.localPosition;
+            defaultLocalRotation = objectToToggleWhileAiming.transform.localRotation;
+        }
 
         if (objectToRotateWithCamera)
-            originalXRotation = objectToRotateWithCamera.eulerAngles.x;
+            originalXRotation = objectToRotateWithCamera.localEulerAngles.x;
     }
 
     void LateUpdate()
     {
         if (!target) return;
 
-        bool isAiming = Input.GetMouseButton(1); // RMB
+        bool isAiming = Input.GetMouseButton(1); // Right Mouse Button
 
-        // Toggle script
+        // Toggle script object visibility
         if (objectToToggleWhileAiming && isAiming != isScriptEnabled)
         {
-            objectToToggleWhileAiming.active = isAiming;
+            objectToToggleWhileAiming.SetActive(isAiming);
             isScriptEnabled = isAiming;
         }
 
-        // Rotate object or reset X rotation
+        // Reset spawn object transform when aiming starts
+        if (objectToToggleWhileAiming && isAiming && !wasAiming)
+        {
+            objectToToggleWhileAiming.transform.localPosition = defaultLocalPosition;
+            objectToToggleWhileAiming.transform.localRotation = defaultLocalRotation;
+        }
+
+        // Handle object rotation with camera
         if (objectToRotateWithCamera)
         {
             if (isAiming)
             {
-                Vector3 currentEuler = objectToRotateWithCamera.eulerAngles;
-                currentEuler.x = pitch;
-                objectToRotateWithCamera.rotation = Quaternion.Euler(currentEuler);
-                animator.SetBool("isAiming", true);
-
+                objectToRotateWithCamera.rotation = Quaternion.Euler(pitch, yaw, 0f);
+                animator?.SetBool("isAiming", true);
             }
-            else if (wasAiming) // Just stopped aiming
+            else if (wasAiming)
             {
-                Vector3 currentEuler = objectToRotateWithCamera.eulerAngles;
-                currentEuler.x = originalXRotation;
-                objectToRotateWithCamera.rotation = Quaternion.Euler(currentEuler);
-                animator.SetBool("isAiming", false);
+                Vector3 euler = objectToRotateWithCamera.localEulerAngles;
+                euler.x = originalXRotation;
+                objectToRotateWithCamera.localEulerAngles = euler;
+                animator?.SetBool("isAiming", false);
             }
         }
 
-        // Update aiming state
+        // Update aiming state for next frame
         wasAiming = isAiming;
 
+        // Adjust camera distance and offset
         float targetDistance = isAiming ? aimDistance : maxDistance;
         float targetShoulderOffset = isAiming ? aimShoulderOffset : shoulderOffset;
         float targetSensitivity = isAiming ? aimSensitivity : sensitivity;
@@ -96,10 +107,12 @@ public class OverTheShoulderCamera : MonoBehaviour
         currentShoulderOffset = Mathf.Lerp(currentShoulderOffset, targetShoulderOffset, Time.deltaTime * smoothSpeed);
         currentSensitivity = Mathf.Lerp(currentSensitivity, targetSensitivity, Time.deltaTime * smoothSpeed);
 
+        // Mouse input
         yaw += Input.GetAxis("Mouse X") * currentSensitivity;
         pitch -= Input.GetAxis("Mouse Y") * currentSensitivity;
         pitch = Mathf.Clamp(pitch, -20f, 50f);
 
+        // Calculate camera position
         Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
         Vector3 shoulderPosition = target.position + (Vector3.up * heightOffset) + (target.right * currentShoulderOffset);
         Vector3 desiredPosition = shoulderPosition - (rotation * Vector3.forward * currentDistance);
@@ -117,5 +130,11 @@ public class OverTheShoulderCamera : MonoBehaviour
         desiredPosition = shoulderPosition - (rotation * Vector3.forward * currentDistance);
         transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * smoothSpeed);
+
+        // Optional: Draw a debug ray from the projectile spawn point
+        if (objectToToggleWhileAiming)
+        {
+            Debug.DrawRay(objectToToggleWhileAiming.transform.position, objectToToggleWhileAiming.transform.forward * 2f, Color.red);
+        }
     }
 }
