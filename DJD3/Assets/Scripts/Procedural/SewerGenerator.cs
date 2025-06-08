@@ -10,6 +10,8 @@ public class SewerGenerator : MonoBehaviour
     public int numberOfSegments = 20;    // Total number of segments including final alley
     public int seed = 12345;
 
+    public NavMeshBaker navMeshBaker;    // Assign your NavMeshBaker in inspector
+
     private System.Random rng;
     private List<GameObject> allSpawnedTiles = new List<GameObject>();
     private GameObject lastPlacedTile = null;
@@ -52,7 +54,6 @@ public class SewerGenerator : MonoBehaviour
     {
         Transform currentAttachPoint = startPoint;
 
-        // Generate main hallway segments: numberOfSegments - 1 tiles
         int mainHallwayCount = numberOfSegments - 1;
 
         for (int i = 0; i < mainHallwayCount; i++)
@@ -124,7 +125,8 @@ public class SewerGenerator : MonoBehaviour
             if (!placed)
             {
                 Debug.LogWarning($"[GENERATION] Could not place tile {i + 1} after {attempts} attempts. Ending generation.");
-                return; // End generation early, no final tile
+                BakeNavMeshSafe();
+                return;
             }
         }
 
@@ -133,7 +135,7 @@ public class SewerGenerator : MonoBehaviour
 
         bool finalPlaced = false;
         int finalAttempts = 0;
-        int finalMaxAttempts = 10; // limit attempts for final tile
+        int finalMaxAttempts = 10;
 
         while (!finalPlaced && finalAttempts < finalMaxAttempts)
         {
@@ -183,6 +185,20 @@ public class SewerGenerator : MonoBehaviour
         if (!finalPlaced)
         {
             Debug.LogWarning("[GENERATION] Failed to place Final Alley tile after multiple attempts.");
+        }
+
+        BakeNavMeshSafe();
+    }
+
+    void BakeNavMeshSafe()
+    {
+        if (navMeshBaker != null)
+        {
+            navMeshBaker.BakeNavMesh();
+        }
+        else
+        {
+            Debug.LogWarning("[SewerGenerator] NavMeshBaker reference not assigned, skipping NavMesh bake.");
         }
     }
 
