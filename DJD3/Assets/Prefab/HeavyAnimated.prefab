@@ -19364,7 +19364,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -19372,12 +19372,12 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 2.18
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 90
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &3156865325269958922
 BoxCollider:
@@ -19444,7 +19444,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.95
-  m_BaseOffset: 0.99
+  m_BaseOffset: 1.62
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &1356564787917278054
@@ -20261,11 +20261,15 @@ MonoBehaviour:
   targetObject: {fileID: 8044653046116332223}
   _gravityAcceleration: -97
   _maxFallSpeed: 60
-  _maxForwardSpeed: 8
-  _maxBackwardSpeed: 7
-  _maxStrafeSpeed: 8
+  _maxForwardSpeed: 5
+  _maxBackwardSpeed: 3
+  _maxStrafeSpeed: 5
   _jumpSpeed: 0
   animator: {fileID: 5458570075492568433}
+  groundCheckDistance: 1.7
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &4518205836648125713
 Rigidbody:
   m_ObjectHideFlags: 0

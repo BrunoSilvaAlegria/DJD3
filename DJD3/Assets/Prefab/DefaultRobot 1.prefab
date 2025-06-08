@@ -24890,6 +24890,10 @@ MonoBehaviour:
   _maxStrafeSpeed: 8
   _jumpSpeed: 25
   animator: {fileID: 6449313931954743176}
+  groundCheckDistance: 1.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!54 &4518205836648125713
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private GameObject targetObject; // Assign the object to be controlled
+    [SerializeField] private GameObject targetObject;
     [SerializeField] private float _gravityAcceleration;
     [SerializeField] private float _maxFallSpeed;
     [SerializeField] private float _maxForwardSpeed;
@@ -10,17 +10,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _maxStrafeSpeed;
     [SerializeField] private float _jumpSpeed;
     [SerializeField] private Animator animator;
+    [SerializeField] private float groundCheckDistance = 0.2f;
+    [SerializeField] private LayerMask groundLayer;
 
-    private AnimatorStateInfo currentState;
     private CharacterController _controller;
     private Vector3 _velocityHor;
     private Vector3 _velocityVer;
     private Vector3 _motion;
     private bool _jump;
+    private bool _isGrounded;
 
     void Start()
     {
-        currentState = animator.GetCurrentAnimatorStateInfo(0);
         if (targetObject == null)
         {
             Debug.LogError("Target Object not assigned!");
@@ -51,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        _isGrounded = IsGrounded();
+        Debug.Log("Raycast Grounded = " + _isGrounded);
         UpdateRotation();
         CheckForJump();
     }
@@ -63,12 +66,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckForJump()
     {
-        if (Input.GetButtonDown("Jump") && _controller.isGrounded)
+        if (Input.GetButtonDown("Jump") && _isGrounded)
         {
             animator.SetTrigger("jump");
             _jump = true;
         }
-            
     }
 
     void FixedUpdate()
@@ -87,22 +89,21 @@ public class PlayerMovement : MonoBehaviour
 
         if (forwardAxis > 0f)
         {
-            if (_controller.isGrounded)
+            if (_isGrounded)
             {
                 animator.SetBool("isIdle", false);
                 animator.SetBool("walk", true);
             }
 
             _velocityHor.z = forwardAxis * _maxForwardSpeed;
-            if (_velocityHor.magnitude > _maxForwardSpeed)
-                _velocityHor = _velocityHor.normalized * _maxForwardSpeed;
+            _velocityHor = Vector3.ClampMagnitude(_velocityHor, _maxForwardSpeed);
         }
         else if (forwardAxis < 0f)
         {
             _velocityHor.z = forwardAxis * _maxBackwardSpeed;
-            if (_velocityHor.magnitude > _maxBackwardSpeed)
-                _velocityHor = _velocityHor.normalized * _maxBackwardSpeed;
-            if (_controller.isGrounded)
+            _velocityHor = Vector3.ClampMagnitude(_velocityHor, _maxBackwardSpeed);
+
+            if (_isGrounded)
             {
                 animator.SetBool("isIdle", false);
                 animator.SetBool("walk", true);
@@ -110,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (_velocityHor.x != 0)
         {
-            if (_controller.isGrounded)
+            if (_isGrounded)
             {
                 animator.SetBool("isIdle", false);
                 animator.SetBool("walk", true);
@@ -120,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _velocityHor.z = 0f;
             animator.SetBool("walk", false);
-
             animator.SetBool("isIdle", true);
         }
     }
@@ -129,22 +129,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_jump)
         {
-            
             _velocityVer.y = _jumpSpeed;
             _jump = false;
         }
-        else if (_controller.isGrounded)
+        else if (_isGrounded)
         {
             _velocityVer.y = -0.1f;
         }
-        else if (_velocityVer.y > -_maxFallSpeed)
+        else
         {
+            if (_velocityVer.y < -10)
+            {
+                animator.SetTrigger("fall");
+            }
+
             animator.SetBool("walk", false);
             animator.SetBool("isIdle", false);
-            if (_velocityVer.y <-10)
-            {
-                animator.SetTrigger("fall");   
-            }
+
             _velocityVer.y += _gravityAcceleration * Time.fixedDeltaTime;
             _velocityVer.y = Mathf.Max(_velocityVer.y, -_maxFallSpeed);
         }
@@ -155,5 +156,14 @@ public class PlayerMovement : MonoBehaviour
         _motion = (_velocityHor + _velocityVer) * Time.fixedDeltaTime;
         _motion = targetObject.transform.TransformVector(_motion);
         _controller.Move(_motion);
+    }
+
+    /// <summary>
+    /// Perform a downward raycast to check for ground beneath the character.
+    /// </summary>
+    private bool IsGrounded()
+    {
+        Vector3 origin = targetObject.transform.position + Vector3.up * 0.1f;
+        return Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f, groundLayer);
     }
 }
