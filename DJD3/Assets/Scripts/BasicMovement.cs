@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -9,12 +8,11 @@ public class BasicMovement : MonoBehaviour
     public float rotateSpeed = 100f;
 
     private Rigidbody rb;
-    [SerializeField]private Animator animator;
+    [SerializeField] private Animator animator;
 
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
     }
 
     void Update()
@@ -27,7 +25,6 @@ public class BasicMovement : MonoBehaviour
         // Movement
         float moveForward = forwardPressed ? 1f : (backwardPressed ? -1f : 0f);
         Vector3 moveDirection = transform.forward * moveForward;
-
         rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, rb.linearVelocity.y, moveDirection.z * moveSpeed);
 
         // Rotation
@@ -37,20 +34,21 @@ public class BasicMovement : MonoBehaviour
 
         transform.Rotate(0f, rotateDirection * rotateSpeed * Time.deltaTime, 0f);
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        // Animation state management
+        AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
+
+        bool isWalking = currentState.IsName("Walking"); // Replace with actual state name
+        bool isIdle = currentState.IsName("Idle");       // Replace with actual state name
+
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isWalking)
         {
             animator.SetBool("isIdle", false);
             animator.SetBool("isWalking", true);
         }
-        else
+        else if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isIdle)
         {
             animator.SetBool("isWalking", false);
             animator.SetBool("isIdle", true);
         }
-
-        // Animator parameters directly from input
-        //animator.SetBool("isWalking", isMovingInput);
-        //animator.SetBool("isIdle", !isMovingInput);
-        //animator.SetBool("isFalling", !isMovingInput && rb.linearVelocity.y < -0.1f); // Optional: refine with grounded check
     }
 }
