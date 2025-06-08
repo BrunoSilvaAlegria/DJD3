@@ -34,6 +34,8 @@ public class HeavyCombat : MonoBehaviour
     private Vector3 originalLocalPosition;
     private Quaternion originalLocalRotation;
 
+    [SerializeField] private Animator animator;
+
     void Start()
     {
         characterController = targetObject.GetComponent<CharacterController>();
@@ -45,6 +47,7 @@ public class HeavyCombat : MonoBehaviour
 
         if (isActionActive && Input.GetKey(KeyCode.LeftShift) && !Input.GetMouseButton(1) && !isInCooldown)
         {
+            animator.SetTrigger("push");
             heavyRun = true;
             runTimer += Time.deltaTime;
 
