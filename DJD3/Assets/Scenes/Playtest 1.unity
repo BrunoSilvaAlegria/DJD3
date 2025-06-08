@@ -726,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8044653046116332223, guid: 610913f8e5a46654baf93da440185a75, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1038,6 +1038,10 @@ PrefabInstance:
     - target: {fileID: 2100176867506016016, guid: 20654546eeab478478726df026a3d181, type: 3}
       propertyPath: m_Name
       value: PlayerHand
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100176867506016016, guid: 20654546eeab478478726df026a3d181, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2257696305104789387, guid: 20654546eeab478478726df026a3d181, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
