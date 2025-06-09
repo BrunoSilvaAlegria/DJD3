@@ -17,11 +17,16 @@ public class CatchPlayerOnTrigger : MonoBehaviour
     public string animationState2 = "Door2";
 
     private bool hasSpawned = false;
+    private int obstacleCount = 0;
+
+    public float obstacleCooldown = 2f; // Cooldown time in seconds
+    private float cooldownTimer = 0f;
+    private bool inCooldown = false;
 
     public GameObject objectToSpawn;
-    public Transform[] spawnPoints; // Assign 4 Transforms in the Inspector
+    public Transform[] spawnPoints;
 
-    private GameObject detectedTarget; // Updated to GameObject
+    private GameObject detectedTarget;
 
     private void Start()
     {
@@ -34,12 +39,30 @@ public class CatchPlayerOnTrigger : MonoBehaviour
 
     private void Update()
     {
-        //DetectNearbyPlayerDetectors();
+        if (inCooldown)
+        {
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0f)
+            {
+                inCooldown = false;
+                Debug.Log("Detector cooldown complete. Ready to detect again.");
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Obstacle"))
+        {
+            obstacleCount++;
+            Debug.Log($"Touched obstacle: {other.name} | Total obstacles: {obstacleCount}");
+
+            // Cancel cooldown if already running
+            inCooldown = true;
+            cooldownTimer = obstacleCooldown;
+        }
+
+        if (other.CompareTag("Player") && obstacleCount == 0 && !inCooldown)
         {
             detectedTarget = other.gameObject;
             ChangeChildrenMaterials();
@@ -47,10 +70,28 @@ public class CatchPlayerOnTrigger : MonoBehaviour
             rotateZ.rotationSpeed = 300;
             PlayAnimations();
             DetectNearbyPlayerDetectors();
+
             if (!hasSpawned)
             {
                 SpawnObjects();
                 hasSpawned = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            obstacleCount = Mathf.Max(0, obstacleCount - 1);
+            Debug.Log($"Obstacle left: {other.name} | Remaining obstacles: {obstacleCount}");
+
+            // If no more obstacles, start cooldown
+            if (obstacleCount == 0)
+            {
+                inCooldown = true;
+                cooldownTimer = obstacleCooldown;
+                Debug.Log($"All obstacles cleared. Cooldown started: {obstacleCooldown}s");
             }
         }
     }
@@ -90,10 +131,8 @@ public class CatchPlayerOnTrigger : MonoBehaviour
     private void DetectNearbyPlayerDetectors()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, detectionLayer);
-
         foreach (Collider hit in hits)
         {
-            
             PlayerDetector detector = hit.GetComponent<PlayerDetector>();
             if (detector != null)
             {
