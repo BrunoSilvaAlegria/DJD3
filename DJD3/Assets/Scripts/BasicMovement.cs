@@ -1,48 +1,69 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(Animator))]
+
 public class BasicMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float rotateSpeed = 100f;
 
     private Rigidbody rb;
-    [SerializeField] private Animator animator;
+    public Animator animator2;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        // Animator assignment is handled externally, so no code here.
+        animator2 = GetComponent<Animator>();
+
+        if (animator2 == null)
+        {
+            Debug.LogWarning("Animator component missing on this GameObject.");
+        }
     }
 
     private void FixedUpdate()
     {
-        // Input detection
-        bool forwardPressed = Input.GetKey(KeyCode.W);
-        bool backwardPressed = Input.GetKey(KeyCode.S);
-        bool leftPressed = Input.GetKey(KeyCode.A);
-        bool rightPressed = Input.GetKey(KeyCode.D);
-
-        // Movement
-        float moveForward = forwardPressed ? 1f : (backwardPressed ? -1f : 0f);
-        Vector3 moveDirection = transform.forward * moveForward;
-        Vector3 velocity = new Vector3(moveDirection.x * moveSpeed, rb.velocity.y, moveDirection.z * moveSpeed);
-        rb.velocity = velocity;
-
-        // Rotation
+        Vector3 velocity = rb.velocity;
         float rotateDirection = 0f;
-        if (leftPressed) rotateDirection = -1f;
-        else if (rightPressed) rotateDirection = 1f;
 
-        // Rotate the transform directly
-        transform.Rotate(0f, rotateDirection * rotateSpeed * Time.fixedDeltaTime, 0f);
-
-        // Animation
-        bool isWalking = new Vector3(rb.velocity.x, 0f, rb.velocity.z).magnitude > 0.1f;
-        if (animator != null)
+        // Movement input
+        if (Input.GetKey(KeyCode.W))
         {
-            animator.SetBool("isWalking", isWalking);
+            velocity = transform.forward * moveSpeed;
+            animator2.SetBool("isWalking", true);
+            animator2.SetBool("isWalking", false);
+            
+
         }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            velocity = -transform.forward * moveSpeed;
+            animator2.SetBool("isWalking", true);
+            animator2.SetBool("isWalking", false);
+        }
+        else
+        {
+            // No forward/backward input
+            velocity = new Vector3(0f, velocity.y, 0f);
+            animator2.SetBool("isIdle", true);
+            animator2.SetBool("isIdle", false);
+            
+                
+        }
+
+        // Rotation input
+        if (Input.GetKey(KeyCode.A))
+        {
+            rotateDirection = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rotateDirection = 1f;
+        }
+
+        // Apply velocity preserving Y velocity (gravity)
+        rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
+
+        // Apply rotation
+        transform.Rotate(0f, rotateDirection * rotateSpeed * Time.fixedDeltaTime, 0f);
     }
 }
