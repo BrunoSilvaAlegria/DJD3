@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PumpDispenser : MonoBehaviour
+public class Dispenser : MonoBehaviour
 {
     [SerializeField] private GameObject interactableObject;
     [SerializeField] private GameObject replacementPrefab;
