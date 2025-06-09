@@ -741,6 +741,7 @@ GameObject:
   - component: {fileID: 6380361898971215394}
   - component: {fileID: 4304812243140578224}
   - component: {fileID: 901571637281849127}
+  - component: {fileID: 3710054822551685376}
   m_Layer: 0
   m_Name: PlayerHand
   m_TagString: Player
@@ -849,6 +850,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   rotateSpeed: 250
+  animator: {fileID: 3021585699858894410}
 --- !u!136 &901571637281849127
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -872,6 +874,28 @@ CapsuleCollider:
   m_Height: 5.52
   m_Direction: 1
   m_Center: {x: 0, y: -1.42, z: 2.26}
+--- !u!95 &3710054822551685376
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100176867506016016}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2157514204923699618
 GameObject:
   m_ObjectHideFlags: 0
