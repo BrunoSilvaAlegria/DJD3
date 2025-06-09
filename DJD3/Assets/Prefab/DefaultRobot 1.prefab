@@ -18070,6 +18070,7 @@ MonoBehaviour:
   projectileSpeed: 10
   objectToDestroy: {fileID: 8044653046116332223}
   fuelConsumption: 25
+  noFuelSound: {fileID: 8300000, guid: 30b92590c022d8948abd4e2d406b2f0d, type: 3}
   objectToUntag: {fileID: 8044653046116332223}
 --- !u!1 &3751071927827450980
 GameObject:
@@ -23072,6 +23073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6966940564211706084}
   - component: {fileID: 6715026837102676641}
+  - component: {fileID: 6724710883780344597}
   m_Layer: 9
   m_Name: Flamethrower
   m_TagString: Untagged
@@ -23112,6 +23114,105 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
   fuelRate: 1
+  noFuelSound: {fileID: 8300000, guid: 30b92590c022d8948abd4e2d406b2f0d, type: 3}
+  flameLoopSound: {fileID: 8300000, guid: 58e473e077d690440802e52e1c72c5af, type: 3}
+--- !u!82 &6724710883780344597
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7705022917589542152}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7760040859331536201
 GameObject:
   m_ObjectHideFlags: 0
@@ -23447,6 +23548,7 @@ GameObject:
   - component: {fileID: 5075659027121884543}
   - component: {fileID: 1530726404697536308}
   - component: {fileID: 1356564787917278054}
+  - component: {fileID: 2214182936851130321}
   m_Layer: 9
   m_Name: DefaultRobot 1
   m_TagString: Player
@@ -23541,6 +23643,7 @@ MonoBehaviour:
   initialBurningDamage: 1
   fire: {fileID: 4334036789229396384}
   smoke: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 3794700aa62ec1d4e87e347beb25c8d6, type: 3}
 --- !u!195 &1530726404697536308
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -23575,6 +23678,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a33c14a6cfca21346bb4c4e52d7d80de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &2214182936851130321
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044653046116332223}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8106148486636565961
 GameObject:
   m_ObjectHideFlags: 0
@@ -24902,6 +25102,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectA: {fileID: 7705022917589542152}
   objectB: {fileID: 3723968762586675538}
+  switchSound: {fileID: 8300000, guid: dd10b8c1b8aaae14082b279986fd8850, type: 3}
+  pitchMin: 0.95
+  pitchMax: 1.05
 --- !u!114 &424244900239838802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24926,6 +25129,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  footstepClip: {fileID: 8300000, guid: 8675d81323c309b43b6a787157fe6d4c, type: 3}
+  footstepInterval: 0.44
+  pitchMin: 0.9
+  pitchMax: 1.1
 --- !u!54 &4518205836648125713
 Rigidbody:
   m_ObjectHideFlags: 0

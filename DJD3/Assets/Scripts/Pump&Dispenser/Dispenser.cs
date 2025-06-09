@@ -9,18 +9,18 @@ public class Dispenser : MonoBehaviour
     private GameObject playerInside = null;
     private Transform spawnPoint;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip interactSound;
+    private AudioSource audioSource;
+
     private void Start()
     {
-        // Find the SpawnPoint child by name
         Transform child = transform.Find("SpawnPoint");
-        if (child != null)
-        {
-            spawnPoint = child;
-        }
-        else
-        {
-            Debug.LogWarning("SpawnPoint child not found on PumpDispenser object.");
-        }
+        spawnPoint = child;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,6 +48,8 @@ public class Dispenser : MonoBehaviour
         if (canInteract && Input.GetKeyDown(KeyCode.F) && playerInside != null)
         {
             Debug.Log("Interaction triggered!");
+
+            PlayInteractSound();
 
             if (playerInside.layer == LayerMask.NameToLayer("inControll"))
             {
@@ -78,5 +80,11 @@ public class Dispenser : MonoBehaviour
             canInteract = false;
             interactableObject.SetActive(false);
         }
+    }
+
+    private void PlayInteractSound()
+    {
+        if (interactSound != null)
+            audioSource.PlayOneShot(interactSound);
     }
 }

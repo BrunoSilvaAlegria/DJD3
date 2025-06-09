@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement Settings")]
     [SerializeField] private GameObject targetObject;
     [SerializeField] private float _gravityAcceleration;
     [SerializeField] private float _maxFallSpeed;
@@ -13,12 +14,21 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.2f;
     [SerializeField] private LayerMask groundLayer;
 
+    [Header("Footstep Settings")]
+    [SerializeField] private AudioClip footstepClip;
+    [SerializeField] private float footstepInterval = 0.5f;
+    [SerializeField] private float pitchMin = 0.9f;
+    [SerializeField] private float pitchMax = 1.1f;
+
     private CharacterController _controller;
     private Vector3 _velocityHor;
     private Vector3 _velocityVer;
     private Vector3 _motion;
     private bool _jump;
     private bool _isGrounded;
+
+    private AudioSource _audioSource;
+    private float _footstepTimer;
 
     void Start()
     {
@@ -36,6 +46,11 @@ public class PlayerMovement : MonoBehaviour
             enabled = false;
             return;
         }
+
+        _audioSource = targetObject.AddComponent<AudioSource>();
+        _audioSource.playOnAwake = false;
+        _audioSource.spatialBlend = 1f; // 3D sound
+        _audioSource.clip = footstepClip;
 
         _velocityHor = Vector3.zero;
         _velocityVer = Vector3.zero;
@@ -56,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Raycast Grounded = " + _isGrounded);
         UpdateRotation();
         CheckForJump();
+
+        HandleFootsteps();
     }
 
     private void UpdateRotation()
@@ -165,5 +182,32 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 origin = targetObject.transform.position + Vector3.up * 0.1f;
         return Physics.Raycast(origin, Vector3.down, groundCheckDistance + 0.1f, groundLayer);
+    }
+
+    private void HandleFootsteps()
+    {
+        bool isMoving = _isGrounded && (_velocityHor.x != 0 || _velocityHor.z != 0);
+
+        if (isMoving)
+        {
+            _footstepTimer += Time.deltaTime;
+            if (_footstepTimer >= footstepInterval)
+            {
+                _footstepTimer = 0f;
+                PlayFootstepSound();
+            }
+        }
+        else
+        {
+            _footstepTimer = footstepInterval; // reset timer so sound plays quickly after starting to walk again
+        }
+    }
+
+    private void PlayFootstepSound()
+    {
+        if (footstepClip == null) return;
+
+        _audioSource.pitch = Random.Range(pitchMin, pitchMax);
+        _audioSource.PlayOneShot(footstepClip);
     }
 }

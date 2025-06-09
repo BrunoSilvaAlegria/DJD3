@@ -28,11 +28,22 @@ public class RobotStatus : MonoBehaviour
 
     private Coroutine burnCoroutine;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip hitSound;
+    private AudioSource audioSource;
+
     void Start()
     {
-        fire.active = false;
+        fire.SetActive(false);
+        smoke.SetActive(false);
         currentHealth = maxHealth;
         playerManager = FindAnyObjectByType<PlayerManager>();
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
         canTakeOver = false;
     }
 
@@ -41,9 +52,8 @@ public class RobotStatus : MonoBehaviour
         if (currentHealth <= healthToTakeOver)
         {
             canTakeOver = true;
-            smoke.active = true;
+            smoke.SetActive(true);
         }
-
     }
 
     public void GetHit(int damage)
@@ -55,10 +65,15 @@ public class RobotStatus : MonoBehaviour
         }
 
         lastHitTime = Time.time;
-        if(fire.active == false)
+
+        // Play hit sound
+        PlayHitSound();
+
+        if (!fire.activeSelf)
         {
             playerManager.GainFuel(fuelPerHit);
         }
+
         currentHealth -= damage;
         Debug.Log($"Robot hit for {damage} damage");
 
@@ -66,6 +81,14 @@ public class RobotStatus : MonoBehaviour
         {
             Debug.Log("Robot killed");
             Destroy(objectToDestroy);
+        }
+    }
+
+    private void PlayHitSound()
+    {
+        if (hitSound != null && !audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(hitSound);
         }
     }
 
@@ -84,13 +107,13 @@ public class RobotStatus : MonoBehaviour
 
         while (elapsed < burnTimer)
         {
-            fire.active = true;
+            fire.SetActive(true);
             GetHit(initialBurningDamage);
             yield return new WaitForSeconds(timeTillHit);
             GetHit(burningDamage);
             elapsed += timeTillHit;
         }
-        fire.active = false;
+        fire.SetActive(false);
         burnCoroutine = null;
     }
 }

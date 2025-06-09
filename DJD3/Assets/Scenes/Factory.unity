@@ -7295,6 +7295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHand
       objectReference: {fileID: 0}
+    - target: {fileID: 2100176867506016016, guid: 20654546eeab478478726df026a3d181, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5344893169683608079, guid: 20654546eeab478478726df026a3d181, type: 3}
       propertyPath: m_LocalPosition.x
       value: 18.050842
@@ -7560,7 +7564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5251356794251325509, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5350448516989198366, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
       propertyPath: m_Name
@@ -7568,7 +7572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5553970788519556194, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6722755992659361251, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16448,6 +16452,7 @@ MonoBehaviour:
   animator: {fileID: 1557063412}
   inRange: 0
   gameObject1: {fileID: 477787619}
+  interactSound: {fileID: 8300000, guid: c29348e4ad06a5d49990829f01cb8db2, type: 3}
 --- !u!1001 &557441965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25940,6 +25945,14 @@ PrefabInstance:
     - target: {fileID: 2968765609082760779, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
       propertyPath: checkpointID
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383729150781158137, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383729150781158137, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.777
       objectReference: {fileID: 0}
     - target: {fileID: 6671066871650210221, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
       propertyPath: m_Name
@@ -46063,6 +46076,7 @@ MonoBehaviour:
   animator: {fileID: 8613174113092635231}
   inRange: 0
   gameObject1: {fileID: 279281004}
+  interactSound: {fileID: 8300000, guid: 7033cced8426560419ed0410b0c1cc40, type: 3}
 --- !u!1001 &1871759244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48643,6 +48657,7 @@ MonoBehaviour:
   animator: {fileID: 302115783}
   inRange: 0
   gameObject1: {fileID: 1636024774}
+  interactSound: {fileID: 8300000, guid: 7033cced8426560419ed0410b0c1cc40, type: 3}
 --- !u!65 &1977019547
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54316,6 +54331,14 @@ PrefabInstance:
     - target: {fileID: 2308324481371275930, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383729150781158137, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.989
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383729150781158137, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.694
       objectReference: {fileID: 0}
     - target: {fileID: 6671066871650210221, guid: 7cadc8ae54277404fbfbd8112819735d, type: 3}
       propertyPath: m_Name

@@ -2,13 +2,17 @@ using UnityEngine;
 
 public class InteractionTrigger : MonoBehaviour
 {
-    public GameObject objectToShow;          // MeshRenderer object shown while player is inside
-    public GameObject objectToToggle;        // Object activated/deactivated when pressing F
-    public MonoBehaviour scriptToToggle;     // Script enabled/disabled when pressing F
+    public GameObject objectToShow;          
+    public GameObject objectToToggle;        
+    public MonoBehaviour scriptToToggle;     
     public bool canInteract { get; private set; } = false;
 
     private MeshRenderer meshRenderer;
     private bool toggled = false;
+
+    [Header("Audio")]
+    [SerializeField] private AudioClip interactSound;
+    private AudioSource audioSource;
 
     private void Start()
     {
@@ -25,9 +29,12 @@ public class InteractionTrigger : MonoBehaviour
         if (scriptToToggle != null)
             scriptToToggle.enabled = true;
 
-        // Hide and lock cursor at start
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
     private void Update()
@@ -36,17 +43,16 @@ public class InteractionTrigger : MonoBehaviour
         {
             toggled = !toggled;
 
-            // Toggle object
             if (objectToToggle != null)
                 objectToToggle.SetActive(toggled);
 
-            // Toggle script
             if (scriptToToggle != null)
                 scriptToToggle.enabled = !toggled;
 
-            // Toggle cursor
             Cursor.visible = toggled;
             Cursor.lockState = toggled ? CursorLockMode.None : CursorLockMode.Locked;
+
+            PlayInteractSound();
         }
     }
 
@@ -70,7 +76,6 @@ public class InteractionTrigger : MonoBehaviour
 
             canInteract = false;
 
-            // Reset toggle state
             toggled = false;
 
             if (objectToToggle != null)
@@ -79,9 +84,14 @@ public class InteractionTrigger : MonoBehaviour
             if (scriptToToggle != null)
                 scriptToToggle.enabled = true;
 
-            // Hide and lock cursor again
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    private void PlayInteractSound()
+    {
+        if (interactSound != null)
+            audioSource.PlayOneShot(interactSound);
     }
 }

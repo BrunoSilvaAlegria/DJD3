@@ -944,6 +944,7 @@ GameObject:
   - component: {fileID: 85627055787594992}
   - component: {fileID: 4983450414654780132}
   - component: {fileID: 3017157158175547372}
+  - component: {fileID: 4594599232098316387}
   m_Layer: 8
   m_Name: DefaultAI
   m_TagString: Default
@@ -1038,6 +1039,7 @@ MonoBehaviour:
   initialBurningDamage: 1
   fire: {fileID: 6402097179190988460}
   smoke: {fileID: 3816717473333489019}
+  hitSound: {fileID: 8300000, guid: 3794700aa62ec1d4e87e347beb25c8d6, type: 3}
 --- !u!195 &3017157158175547372
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1060,6 +1062,103 @@ NavMeshAgent:
   m_BaseOffset: 0.99
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!82 &4594599232098316387
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298843674692623241}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1344406837141053378
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,7 +2284,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 24e88d3336dcf7b438cc2e9b776a779a, type: 3}
+  - {fileID: 2100000, guid: 994f6833424a10a47bc601667a2f2ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2402,7 +2501,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 24e88d3336dcf7b438cc2e9b776a779a, type: 3}
+  - {fileID: 2100000, guid: 994f6833424a10a47bc601667a2f2ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3094,7 +3193,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 24e88d3336dcf7b438cc2e9b776a779a, type: 3}
+  - {fileID: 2100000, guid: 994f6833424a10a47bc601667a2f2ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3278,7 +3377,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 24e88d3336dcf7b438cc2e9b776a779a, type: 3}
+  - {fileID: 2100000, guid: 994f6833424a10a47bc601667a2f2ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3767,6 +3866,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
   fuelRate: 1
+  noFuelSound: {fileID: 0}
 --- !u!1 &3471066590169031357
 GameObject:
   m_ObjectHideFlags: 0
@@ -4632,6 +4732,14 @@ MonoBehaviour:
   _maxStrafeSpeed: 6
   _jumpSpeed: 15
   animator: {fileID: 0}
+  groundCheckDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  footstepClip: {fileID: 0}
+  footstepInterval: 0.5
+  pitchMin: 0.9
+  pitchMax: 1.1
 --- !u!54 &8245045495226915942
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9899,7 +10007,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 24e88d3336dcf7b438cc2e9b776a779a, type: 3}
+  - {fileID: 2100000, guid: 994f6833424a10a47bc601667a2f2ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16231,6 +16339,7 @@ MonoBehaviour:
   projectileSpeed: 10
   objectToDestroy: {fileID: 5105785940758033734}
   fuelConsumption: 50
+  noFuelSound: {fileID: 0}
   objectToUntag: {fileID: 1298843674692623241}
 --- !u!1 &7965543350509322186
 GameObject:
@@ -16287,7 +16396,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: 24e88d3336dcf7b438cc2e9b776a779a, type: 3}
+  - {fileID: 2100000, guid: 994f6833424a10a47bc601667a2f2ba5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

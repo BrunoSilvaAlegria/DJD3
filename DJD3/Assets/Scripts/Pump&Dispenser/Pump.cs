@@ -7,10 +7,17 @@ public class Pump : MonoBehaviour
     private GameObject playerInside = null;
     private PlayerManager manager;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip interactSound;
+    private AudioSource audioSource;
+
     private void Start()
     {
         manager = FindObjectOfType<PlayerManager>();
-        // Find the SpawnPoint child by name
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,8 +47,16 @@ public class Pump : MonoBehaviour
             Debug.Log("Interaction triggered!");
             manager.GainFuel(100);
 
+            PlayInteractSound();
+
             canInteract = false;
             interactableObject.SetActive(false);
         }
+    }
+
+    private void PlayInteractSound()
+    {
+        if (interactSound != null)
+            audioSource.PlayOneShot(interactSound);
     }
 }

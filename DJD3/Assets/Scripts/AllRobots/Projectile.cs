@@ -15,6 +15,11 @@ public class Projectile : MonoBehaviour
 
     private Rigidbody rb;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip startSound;
+    [SerializeField] private AudioClip loopSound;
+    private AudioSource startAudioSource;
+    private AudioSource loopAudioSource;
 
     private void Start()
     {
@@ -22,9 +27,28 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
 
+        // Setup audio sources
+        startAudioSource = gameObject.AddComponent<AudioSource>();
+        loopAudioSource = gameObject.AddComponent<AudioSource>();
+
+        if (startSound != null)
+        {
+            startAudioSource.clip = startSound;
+            startAudioSource.playOnAwake = false;
+            startAudioSource.loop = false;
+            startAudioSource.Play();
+        }
+
+        if (loopSound != null)
+        {
+            loopAudioSource.clip = loopSound;
+            loopAudioSource.playOnAwake = false;
+            loopAudioSource.loop = true;
+            loopAudioSource.Play();
+        }
+
         if (whereToSpawn != null)
         {
-            // Launch the projectile in the direction the spawn point is facing
             rb.linearVelocity = whereToSpawn.forward * launchForce;
         }
         else
@@ -35,19 +59,14 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-
-        // Get mouse input
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
-        // Calculate yaw and pitch
         float yaw = mouseX * rotationSpeed * Time.deltaTime;
         float pitch = -mouseY * rotationSpeed * Time.deltaTime;
 
-        // Apply pitch (around X) and yaw (around Y) only
         transform.Rotate(pitch, yaw, 0f, Space.Self);
 
-        // Lock roll (Z) rotation
         Vector3 euler = transform.eulerAngles;
         euler.z = 0f;
         transform.eulerAngles = euler;
@@ -55,8 +74,8 @@ public class Projectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Maintain constant forward velocity
         rb.linearVelocity = transform.forward * launchForce;
+
         if (playerManager != null && playerManager.currentFuel > 0)
         {
             playerManager.SpendFuel(drainAmount);
@@ -122,8 +141,6 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log("Hit unknown object");
         }
-
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -133,32 +150,26 @@ public class Projectile : MonoBehaviour
         {
             Debug.Log("Hit default tagged object");
             RobotStatus enemy = hitObject.GetComponent<RobotStatus>();
-            if (enemy.canTakeOver)
+            if (enemy != null && enemy.canTakeOver)
             {
-                /*if (enemy.canTakeOver)
-                {
-                    playerManager.currentHealth = 3;
-                    Destroy(hitObject);
-                    ReplaceObject(defaultPrefab);
-                }
-                else
-                {
-                    playerManager.currentHealth = 1;
-                    ReplaceObject(terrainPrefab);
-                }*/
                 playerManager.currentFuel += 50;
                 Destroy(hitObject);
             }
         }
-
     }
 
     private void ReplaceObject(GameObject prefab)
     {
+        if (loopAudioSource != null && loopAudioSource.isPlaying)
+        {
+            loopAudioSource.Stop();
+        }
+
         if (prefab != null && whereToSpawn != null)
         {
             Instantiate(prefab, whereToSpawn.position, prefab.transform.rotation);
-            Destroy(gameObject);
         }
+
+        Destroy(gameObject);
     }
 }

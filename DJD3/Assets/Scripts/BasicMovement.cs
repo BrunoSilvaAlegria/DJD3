@@ -2,14 +2,24 @@ using UnityEngine;
 
 public class BasicMovement : MonoBehaviour
 {
+    [Header("Movement Settings")]
     public float moveSpeed = 5f;
     public float rotateSpeed = 100f;
 
     private Rigidbody rb;
     public Animator animator2;
 
-    private string currentAnim = ""; // Tracks the current animation state name
+    private string currentAnim = "";
     private int animLayer = 0;
+
+    [Header("Footstep Settings")]
+    public AudioClip footstepClip;
+    public float footstepInterval = 0.5f;
+    public float pitchMin = 0.9f;
+    public float pitchMax = 1.1f;
+
+    private AudioSource footstepAudioSource;
+    private float footstepTimer = 0f;
 
     private void Start()
     {
@@ -19,6 +29,16 @@ public class BasicMovement : MonoBehaviour
         {
             Debug.LogWarning("Animator component missing on this GameObject.");
         }
+
+        // Setup audio source for footsteps
+        footstepAudioSource = GetComponent<AudioSource>();
+        if (footstepAudioSource == null)
+        {
+            footstepAudioSource = gameObject.AddComponent<AudioSource>();
+        }
+        footstepAudioSource.playOnAwake = false;
+        footstepAudioSource.spatialBlend = 1f;
+        footstepAudioSource.clip = footstepClip;
     }
 
     private void FixedUpdate()
@@ -30,16 +50,11 @@ public class BasicMovement : MonoBehaviour
         string targetAnim = walkingInput ? "Walking" : "Idle";
 
         AnimatorStateInfo stateInfo = animator2.GetCurrentAnimatorStateInfo(animLayer);
-
         bool sameAnimationPlaying = currentAnim == targetAnim;
         bool animationFinished = stateInfo.normalizedTime >= 1f;
 
         if (!sameAnimationPlaying || (sameAnimationPlaying && animationFinished))
         {
-            // Only update animator parameters if:
-            // - We're switching to a different animation OR
-            // - We're restarting the same animation but it finished
-
             if (walkingInput)
             {
                 animator2.SetBool("isWalking", true);
@@ -53,9 +68,8 @@ public class BasicMovement : MonoBehaviour
 
             currentAnim = targetAnim;
         }
-        // else do nothing (same animation playing and not finished)
 
-        // Apply movement velocity
+        // Apply movement
         if (walkingInput)
         {
             velocity = (Input.GetKey(KeyCode.W) ? 1f : -1f) * transform.forward * moveSpeed;
@@ -65,7 +79,7 @@ public class BasicMovement : MonoBehaviour
             velocity = new Vector3(0f, velocity.y, 0f);
         }
 
-        // Rotation input
+        // Apply rotation
         if (Input.GetKey(KeyCode.A))
             rotateDirection = -1f;
         else if (Input.GetKey(KeyCode.D))
@@ -73,5 +87,30 @@ public class BasicMovement : MonoBehaviour
 
         rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
         transform.Rotate(0f, rotateDirection * rotateSpeed * Time.fixedDeltaTime, 0f);
+
+        HandleFootsteps(walkingInput);
+    }
+
+    private void HandleFootsteps(bool isWalking)
+    {
+        if (isWalking && footstepClip != null)
+        {
+            footstepTimer += Time.fixedDeltaTime;
+            if (footstepTimer >= footstepInterval)
+            {
+                footstepTimer = 0f;
+                PlayFootstepSound();
+            }
+        }
+        else
+        {
+            footstepTimer = footstepInterval;
+        }
+    }
+
+    private void PlayFootstepSound()
+    {
+        footstepAudioSource.pitch = Random.Range(pitchMin, pitchMax);
+        footstepAudioSource.PlayOneShot(footstepClip);
     }
 }
