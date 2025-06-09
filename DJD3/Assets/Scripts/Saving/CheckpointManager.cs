@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
 
 public class CheckpointManager : MonoBehaviour
 {
-    public int currentCheckpoint = -1; // default to -1 meaning no checkpoint
+    public int currentCheckpoint = -1;
+    public List<int> unlockedCheckpoints = new List<int>();
 
     private string savePath;
 
@@ -15,7 +17,17 @@ public class CheckpointManager : MonoBehaviour
 
     public void SaveCheckpoint()
     {
-        CheckpointData data = new CheckpointData { currentCheckpoint = currentCheckpoint };
+        if (!unlockedCheckpoints.Contains(currentCheckpoint))
+        {
+            unlockedCheckpoints.Add(currentCheckpoint);
+        }
+
+        CheckpointData data = new CheckpointData
+        {
+            currentCheckpoint = currentCheckpoint,
+            unlockedCheckpoints = unlockedCheckpoints
+        };
+
         File.WriteAllText(savePath, JsonUtility.ToJson(data));
         Debug.Log("Checkpoint saved to: " + savePath);
     }
@@ -27,6 +39,7 @@ public class CheckpointManager : MonoBehaviour
             string json = File.ReadAllText(savePath);
             CheckpointData data = JsonUtility.FromJson<CheckpointData>(json);
             currentCheckpoint = data.currentCheckpoint;
+            unlockedCheckpoints = data.unlockedCheckpoints ?? new List<int>();
             Debug.Log("Checkpoint loaded: " + currentCheckpoint);
         }
         else
