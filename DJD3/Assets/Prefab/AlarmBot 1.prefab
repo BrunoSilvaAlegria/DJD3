@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 837880128947709616}
   - component: {fileID: 3960281829096336203}
   - component: {fileID: 1876462488581048737}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Doors2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 325.90286, y: 325.90286, z: 175.67468}
+  m_LocalScale: {x: 325.90286, y: 325.90286, z: 112.7568}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2428252006300784160}
@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: c429ce6ea558fa244baf2c43b9e41155, type: 3}
+  - {fileID: 2100000, guid: 66dfa471d425e344ba95b5e630879ed2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 5015269637031972541}
   - component: {fileID: 3103170537315113777}
   - component: {fileID: 1818188460710156153}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AlarmLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 325.90286, y: 325.90286, z: 175.67468}
+  m_LocalScale: {x: 325.90286, y: 325.90286, z: 112.7568}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3749189082296970629}
@@ -445,7 +445,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: c429ce6ea558fa244baf2c43b9e41155, type: 3}
+  - {fileID: 2100000, guid: 66dfa471d425e344ba95b5e630879ed2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -551,7 +551,7 @@ GameObject:
   - component: {fileID: 2430882845404523408}
   - component: {fileID: 4402141306619204126}
   - component: {fileID: 2321704285880457155}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: SeekLight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 8049289480496429040}
   - component: {fileID: 9153867902779250174}
   - component: {fileID: 8789942441740862955}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Doors1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +691,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 325.90286, y: 325.90286, z: 175.67468}
+  m_LocalScale: {x: 325.90286, y: 325.90286, z: 112.7568}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2428252006300784160}
@@ -727,7 +727,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: c429ce6ea558fa244baf2c43b9e41155, type: 3}
+  - {fileID: 2100000, guid: 66dfa471d425e344ba95b5e630879ed2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -805,7 +805,7 @@ GameObject:
   - component: {fileID: 296475787706678068}
   - component: {fileID: 9187083517925242390}
   - component: {fileID: 2985290399777154255}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -912,7 +912,7 @@ GameObject:
   - component: {fileID: 4263400919142246311}
   - component: {fileID: 2083172038736542123}
   - component: {fileID: 8109329532805353623}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: SeekLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2428252006300784160}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AlarmBot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1068,7 +1068,7 @@ GameObject:
   - component: {fileID: 521331255153763826}
   - component: {fileID: 1216479247492922398}
   - component: {fileID: 9039512299410316170}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8398c1663969a4684ff379b5787674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 18.67
+  detectionRadius: 46.5
   detectionLayer:
     serializedVersion: 2
     m_Bits: 1024
@@ -1168,7 +1168,7 @@ GameObject:
   - component: {fileID: 3040333369505683864}
   - component: {fileID: 2159633534705152305}
   - component: {fileID: 5798298563733395869}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1279,7 +1279,7 @@ GameObject:
   - component: {fileID: 6490788742109715902}
   - component: {fileID: 130266299413323385}
   - component: {fileID: 1379545691689221768}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Vision (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1389,7 +1389,7 @@ GameObject:
   - component: {fileID: 7767249101555883322}
   - component: {fileID: 3477462105652587730}
   - component: {fileID: 7657707250173831252}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: SeekLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1511,7 +1511,7 @@ GameObject:
   - component: {fileID: 7954301942307926774}
   - component: {fileID: 8441253641472334291}
   - component: {fileID: 7071320898845646676}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1527,7 +1527,7 @@ Transform:
   m_GameObject: {fileID: 6810407564675001559}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: -3.04, z: 0}
+  m_LocalPosition: {x: 0, y: -4.31, z: 0}
   m_LocalScale: {x: 325.90286, y: 325.90286, z: 325.90286}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1566,7 +1566,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: c429ce6ea558fa244baf2c43b9e41155, type: 3}
+  - {fileID: 2100000, guid: 66dfa471d425e344ba95b5e630879ed2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1612,7 +1612,7 @@ GameObject:
   - component: {fileID: 741542629204931297}
   - component: {fileID: 3478519525573451266}
   - component: {fileID: 4858181763190955684}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: SeekLight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1731,7 +1731,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 769782307865358343}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1766,7 +1766,7 @@ GameObject:
   - component: {fileID: 966418642755092383}
   - component: {fileID: 5084629506940640395}
   - component: {fileID: 1279253899948916868}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Vision (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1925,7 +1925,7 @@ GameObject:
   - component: {fileID: 4680755856041542935}
   - component: {fileID: 3414876585837181612}
   - component: {fileID: 1230616345533529859}
-  m_Layer: 12
+  m_Layer: 7
   m_Name: Vision (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
