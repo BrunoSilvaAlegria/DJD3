@@ -34,11 +34,6 @@ public class BasicMovement : MonoBehaviour
 
         transform.Rotate(0f, rotateDirection * rotateSpeed * Time.deltaTime, 0f);
 
-        // Animation state management
-        AnimatorStateInfo currentState = animator.GetCurrentAnimatorStateInfo(0);
-
-        bool isWalking = currentState.IsName("Walking"); // Replace with actual state name
-        bool isIdle = currentState.IsName("Idle");       // Replace with actual state name
 
         if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isWalking)
         {
