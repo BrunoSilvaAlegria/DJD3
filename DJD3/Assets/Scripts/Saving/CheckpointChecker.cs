@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CheckpointChecker : MonoBehaviour
 {
@@ -28,20 +29,27 @@ public class CheckpointChecker : MonoBehaviour
 
         if (checkpointManager != null)
         {
-            if (checkpointID > checkpointManager.currentCheckpoint)
-            {
-                checkpointManager.currentCheckpoint = checkpointID;
-                checkpointManager.SaveCheckpoint();
-                Debug.Log("Checkpoint manually set to ID: " + checkpointID);
-            }
-            else
-            {
-                Debug.Log("Attempted to set an older or equal checkpoint. Ignored.");
-            }
+            checkpointManager.currentCheckpoint = checkpointID;
+            checkpointManager.SaveCheckpoint();
+            Debug.Log("Checkpoint manually set to ID: " + checkpointID);
+            
         }
         else
         {
             Debug.LogWarning("CheckpointManager not found. Cannot set checkpoint.");
         }
+    }
+
+    public void ChangeToFactory()
+    {
+        SetCheckpointToSelf();
+        SceneManager.LoadSceneAsync("Factory");
+
+    }
+
+    public void ChangeToSewer()
+    {
+        SetCheckpointToSelf();
+        SceneManager.LoadSceneAsync("Level1");
     }
 }
