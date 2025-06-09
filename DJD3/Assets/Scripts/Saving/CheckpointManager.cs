@@ -15,6 +15,14 @@ public class CheckpointManager : MonoBehaviour
         LoadCheckpoint();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            DeleteCheckpointData();
+        }
+    }
+
     public void SaveCheckpoint()
     {
         if (!unlockedCheckpoints.Contains(currentCheckpoint))
@@ -45,6 +53,21 @@ public class CheckpointManager : MonoBehaviour
         else
         {
             Debug.Log("No checkpoint save file found. Starting fresh.");
+        }
+    }
+
+    public void DeleteCheckpointData()
+    {
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+            currentCheckpoint = -1;
+            unlockedCheckpoints.Clear();
+            Debug.Log("Checkpoint data deleted.");
+        }
+        else
+        {
+            Debug.Log("No checkpoint file to delete.");
         }
     }
 }

@@ -6,11 +6,11 @@ public class SewerGenerator : MonoBehaviour
 {
     public Transform startPoint;
     public List<GameObject> hallwayPrefabs;
-    public GameObject finalAlleyPrefab;  // The special final prefab
-    public int numberOfSegments = 20;    // Total number of segments including final alley
+    public GameObject finalAlleyPrefab;
+    public int numberOfSegments = 20;
     public int seed = 12345;
 
-    public NavMeshBaker navMeshBaker;    // Assign your NavMeshBaker in inspector
+    public NavMeshBaker navMeshBaker;
 
     private System.Random rng;
     private List<GameObject> allSpawnedTiles = new List<GameObject>();
@@ -46,6 +46,17 @@ public class SewerGenerator : MonoBehaviour
             return;
         }
 
+        if (SeedManager.Instance != null)
+        {
+            seed = SeedManager.Instance.Seed;
+        }
+        else
+        {
+            Debug.LogWarning("[SEWER GENERATOR] SeedManager not found, using default seed.");
+        }
+
+        Debug.Log($"[SEWER GENERATOR] Using Seed: {seed}");
+
         rng = new System.Random(seed);
         GenerateSewer();
     }
@@ -53,7 +64,6 @@ public class SewerGenerator : MonoBehaviour
     void GenerateSewer()
     {
         Transform currentAttachPoint = startPoint;
-
         int mainHallwayCount = numberOfSegments - 1;
 
         for (int i = 0; i < mainHallwayCount; i++)
@@ -65,7 +75,6 @@ public class SewerGenerator : MonoBehaviour
             while (!placed && attempts < maxAttempts)
             {
                 int index = GetWeightedPrefabIndex();
-
                 GameObject prefab = hallwayPrefabs[index];
                 string prefabName = prefab.name;
 
@@ -116,7 +125,7 @@ public class SewerGenerator : MonoBehaviour
                 lastPlacedTile = instance;
                 lastPrefabName = prefabName;
 
-                Debug.Log($"[GENERATION] Tile {i + 1} placed: {instance.name}. Updated lastPlacedTile and lastPrefabName.");
+                Debug.Log($"[GENERATION] Tile {i + 1} placed: {instance.name}.");
 
                 currentAttachPoint = instance.transform.Find("ExitPoint");
                 placed = true;
@@ -124,70 +133,54 @@ public class SewerGenerator : MonoBehaviour
 
             if (!placed)
             {
-                Debug.LogWarning($"[GENERATION] Could not place tile {i + 1} after {attempts} attempts. Ending generation.");
+                Debug.LogWarning($"[GENERATION] Could not place tile {i + 1} after {attempts} attempts. Placing Final Alley tile instead.");
+                PlaceFinalAlleyAtPreviousEntry(currentAttachPoint);
                 BakeNavMeshSafe();
                 return;
             }
         }
 
-        // Place the final Alley tile as the last tile
         Debug.Log("[GENERATION] Attempting to place Final Alley tile as last tile...");
 
-        bool finalPlaced = false;
-        int finalAttempts = 0;
-        int finalMaxAttempts = 10;
-
-        while (!finalPlaced && finalAttempts < finalMaxAttempts)
-        {
-            finalAttempts++;
-
-            GameObject instance = Instantiate(finalAlleyPrefab);
-            Transform entry = instance.transform.Find("EntryPoint");
-            Transform exit = instance.transform.Find("ExitPoint");
-
-            if (entry == null || exit == null)
-            {
-                Debug.LogError($"Final Alley prefab is missing EntryPoint or ExitPoint.");
-                Destroy(instance);
-                break;
-            }
-
-            instance.transform.rotation = Quaternion.identity;
-
-            Quaternion rotationOffset = Quaternion.FromToRotation(entry.forward, currentAttachPoint.forward);
-            instance.transform.rotation = rotationOffset * instance.transform.rotation;
-
-            Vector3 euler = instance.transform.rotation.eulerAngles;
-            euler.x = 0f;
-            euler.z = 0f;
-            instance.transform.rotation = Quaternion.Euler(euler);
-
-            Vector3 entryWorldPos = entry.position;
-            Vector3 offset = currentAttachPoint.position - entryWorldPos;
-            instance.transform.position += offset;
-
-            Physics.SyncTransforms();
-
-            if (IsOverlapping(instance, finalAlleyPrefab.name))
-            {
-                Destroy(instance);
-                continue;
-            }
-
-            allSpawnedTiles.Add(instance);
-            lastPlacedTile = instance;
-            lastPrefabName = finalAlleyPrefab.name;
-
-            Debug.Log("[GENERATION] Final Alley tile placed successfully as last tile.");
-            finalPlaced = true;
-        }
-
-        if (!finalPlaced)
-        {
-            Debug.LogWarning("[GENERATION] Failed to place Final Alley tile after multiple attempts.");
-        }
+        PlaceFinalAlleyAtPreviousEntry(currentAttachPoint);
 
         BakeNavMeshSafe();
+    }
+
+    void PlaceFinalAlleyAtPreviousEntry(Transform previousEntryPoint)
+    {
+        GameObject instance = Instantiate(finalAlleyPrefab);
+        Transform entry = instance.transform.Find("EntryPoint");
+        Transform exit = instance.transform.Find("ExitPoint");
+
+        if (entry == null || exit == null)
+        {
+            Debug.LogError("Final Alley prefab is missing EntryPoint or ExitPoint.");
+            Destroy(instance);
+            return;
+        }
+
+        instance.transform.rotation = Quaternion.identity;
+
+        Quaternion rotationOffset = Quaternion.FromToRotation(exit.forward, previousEntryPoint.forward);
+        instance.transform.rotation = rotationOffset * instance.transform.rotation;
+
+        Vector3 euler = instance.transform.rotation.eulerAngles;
+        euler.x = 0f;
+        euler.z = 0f;
+        instance.transform.rotation = Quaternion.Euler(euler);
+
+        Vector3 exitWorldPos = exit.position;
+        Vector3 offset = previousEntryPoint.position - exitWorldPos;
+        instance.transform.position += offset;
+
+        Physics.SyncTransforms();
+
+        allSpawnedTiles.Add(instance);
+        lastPlacedTile = instance;
+        lastPrefabName = finalAlleyPrefab.name;
+
+        Debug.Log("[GENERATION] Final Alley placed successfully at previous tile’s EntryPoint.");
     }
 
     void BakeNavMeshSafe()
@@ -220,7 +213,6 @@ public class SewerGenerator : MonoBehaviour
         {
             if (otherTile == lastPlacedTile)
             {
-                Debug.Log($"[SKIP] Skipping overlap check with lastPlacedTile: {otherTile.name}");
                 continue;
             }
 
@@ -230,21 +222,14 @@ public class SewerGenerator : MonoBehaviour
             {
                 if (cc.isTrigger || cc.gameObject.layer != hallwayLayer) continue;
 
-                DrawBoundsBox(cc.bounds, Color.green, 2f);
-
                 foreach (var oc in otherColliders)
                 {
                     if (oc.isTrigger || oc.gameObject.layer != hallwayLayer) continue;
 
-                    DrawBoundsBox(oc.bounds, Color.red, 2f);
-
                     if (cc.bounds.Intersects(oc.bounds))
                     {
                         Debug.LogWarning(
-                            $"[COLLISION] Candidate '{candidateName}' collider '{cc.name}' bounds " +
-                            $"center: {cc.bounds.center}, size: {cc.bounds.size} " +
-                            $"overlaps with '{otherTile.name}' collider '{oc.name}' bounds " +
-                            $"center: {oc.bounds.center}, size: {oc.bounds.size}.");
+                            $"[COLLISION] Candidate '{candidateName}' collider '{cc.name}' overlaps with '{otherTile.name}' collider '{oc.name}'.");
                         return true;
                     }
                 }

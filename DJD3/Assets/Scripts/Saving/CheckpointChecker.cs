@@ -11,7 +11,7 @@ public class CheckpointChecker : MonoBehaviour
 
         if (checkpointManager != null)
         {
-            if (!checkpointManager.unlockedCheckpoints.Contains(checkpointID))
+            if (!checkpointManager.unlockedCheckpoints.Contains(checkpointID) && checkpointID != 6)
             {
                 Destroy(gameObject);
             }

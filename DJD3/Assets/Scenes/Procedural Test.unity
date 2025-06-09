@@ -183,6 +183,14 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 424244900239838802, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 2176
+      objectReference: {fileID: 0}
+    - target: {fileID: 424244900239838802, guid: 610913f8e5a46654baf93da440185a75, type: 3}
+      propertyPath: groundCheckDistance
+      value: 3.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 424244900239838802, guid: 610913f8e5a46654baf93da440185a75, type: 3}
       propertyPath: _gravityAcceleration
       value: -97
       objectReference: {fileID: 0}
@@ -2069,6 +2077,14 @@ PrefabInstance:
     - target: {fileID: 3206424120578203353, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721001189807296257, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -277
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721001189807296257, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 392
       objectReference: {fileID: 0}
     - target: {fileID: 4882646914647782816, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
       propertyPath: m_LocalScale.x
@@ -7406,7 +7422,7 @@ GameObject:
   - component: {fileID: 7348544734958601071}
   - component: {fileID: 7663976848264124228}
   - component: {fileID: 4328768376657839592}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Floor_Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
