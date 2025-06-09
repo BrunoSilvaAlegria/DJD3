@@ -13,37 +13,36 @@ public class BasicMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        // Animator assignment is handled externally, so no code here.
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         // Input detection
         bool forwardPressed = Input.GetKey(KeyCode.W);
         bool backwardPressed = Input.GetKey(KeyCode.S);
-        bool isMovingInput = forwardPressed || backwardPressed;
+        bool leftPressed = Input.GetKey(KeyCode.A);
+        bool rightPressed = Input.GetKey(KeyCode.D);
 
         // Movement
         float moveForward = forwardPressed ? 1f : (backwardPressed ? -1f : 0f);
         Vector3 moveDirection = transform.forward * moveForward;
-        rb.linearVelocity = new Vector3(moveDirection.x * moveSpeed, rb.linearVelocity.y, moveDirection.z * moveSpeed);
+        Vector3 velocity = new Vector3(moveDirection.x * moveSpeed, rb.velocity.y, moveDirection.z * moveSpeed);
+        rb.velocity = velocity;
 
         // Rotation
         float rotateDirection = 0f;
-        if (Input.GetKey(KeyCode.A)) rotateDirection = -1f;
-        else if (Input.GetKey(KeyCode.D)) rotateDirection = 1f;
+        if (leftPressed) rotateDirection = -1f;
+        else if (rightPressed) rotateDirection = 1f;
 
-        transform.Rotate(0f, rotateDirection * rotateSpeed * Time.deltaTime, 0f);
+        // Rotate the transform directly
+        transform.Rotate(0f, rotateDirection * rotateSpeed * Time.fixedDeltaTime, 0f);
 
-
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isWalking)
+        // Animation
+        bool isWalking = new Vector3(rb.velocity.x, 0f, rb.velocity.z).magnitude > 0.1f;
+        if (animator != null)
         {
-            animator.SetBool("isIdle", false);
-            animator.SetBool("isWalking", true);
-        }
-        else if (!(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && !isIdle)
-        {
-            animator.SetBool("isWalking", false);
-            animator.SetBool("isIdle", true);
+            animator.SetBool("isWalking", isWalking);
         }
     }
 }
