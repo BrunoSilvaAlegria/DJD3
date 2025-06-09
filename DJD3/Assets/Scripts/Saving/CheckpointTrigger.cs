@@ -23,11 +23,16 @@ public class CheckpointTrigger : MonoBehaviour
     {
         // Check if the object we collided with has a Checkpoint component
         Checkpoint checkpoint = other.GetComponent<Checkpoint>();
-        if (checkpoint != null && checkpointManager != null && checkpointManager.currentCheckpoint != checkpoint.checkpointID)
+        if (checkpoint != null && checkpointManager != null)
         {
-            checkpointManager.currentCheckpoint = checkpoint.checkpointID;
-            checkpointManager.SaveCheckpoint();
-            Debug.Log("Checkpoint updated to ID: " + checkpoint.checkpointID);
+            // Only update if the new checkpoint ID is greater than the current one
+            if (checkpoint.checkpointID > checkpointManager.currentCheckpoint)
+            {
+                checkpointManager.currentCheckpoint = checkpoint.checkpointID;
+                checkpointManager.SaveCheckpoint();
+                Debug.Log("Checkpoint updated to ID: " + checkpoint.checkpointID);
+            }
         }
     }
+
 }
