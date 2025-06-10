@@ -41,48 +41,24 @@ public class PlayerManager : MonoBehaviour
             healthSlider.value = currentHealth;
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            SpendHealth(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            GainHealth(10);
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GainFuel(100);
-        }
+        if (Input.GetKeyDown(KeyCode.H)) SpendHealth(10);
+        if (Input.GetKeyDown(KeyCode.J)) GainHealth(10);
+        if (Input.GetKeyDown(KeyCode.K)) GainFuel(100);
     }
 
     public void SpendFuel(int fuel)
     {
-        currentFuel -= fuel;
-        if (currentFuel < 0)
-        {
-            currentFuel = 0;
-        }
+        currentFuel = Mathf.Max(0, currentFuel - fuel);
     }
 
     public void GainFuel(int fuel)
     {
-        currentFuel += fuel;
-        if (currentFuel > maxFuel)
-        {
-            currentFuel = maxFuel;
-        }
+        currentFuel = Mathf.Min(maxFuel, currentFuel + fuel);
     }
 
     public void SpendHealth(int health)
     {
-        if (Time.time - lastHitTime < invincible)
-        {
-            Debug.Log("Hit ignored due to invincibility");
-            return;
-        }
-        if (isDead) return;
+        if (Time.time - lastHitTime < invincible || isDead) return;
 
         lastHitTime = Time.time;
         currentHealth -= health;
@@ -96,11 +72,7 @@ public class PlayerManager : MonoBehaviour
 
     public void GainHealth(int health)
     {
-        currentHealth += health;
-        if (currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+        currentHealth = Mathf.Min(maxHealth, currentHealth + health);
     }
 
     private void Die()
@@ -110,62 +82,54 @@ public class PlayerManager : MonoBehaviour
 
         Debug.Log("Player died");
 
-        // Find all GameObjects tagged "Player"
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject playerObj in players)
         {
-            // Spawn death object at each player's position with rotation 90° on X
+            // Spawn death object
             if (objectToSpawnOnDeath != null)
             {
-                GameObject spawnedObject = Instantiate(objectToSpawnOnDeath, playerObj.transform.position, Quaternion.Euler(90f, 0f, 0f));
-                Destroy(spawnedObject, 2f);
+                GameObject spawned = Instantiate(
+                    objectToSpawnOnDeath,
+                    playerObj.transform.position,
+                    Quaternion.Euler(90f, 0f, 0f)
+                );
+                Destroy(spawned, 2f);
             }
 
-            // Play death sound at player's position
+            // Play sound
             if (deathSound != null)
             {
                 AudioSource.PlayClipAtPoint(deathSound, playerObj.transform.position);
             }
 
-            // Disable PlayerMovement components
-            PlayerMovement[] playerMovements = playerObj.GetComponentsInChildren<PlayerMovement>(true);
-            foreach (var pm in playerMovements)
-            {
+            // Disable movement scripts
+            foreach (var pm in playerObj.GetComponentsInChildren<PlayerMovement>(true))
                 pm.enabled = false;
-            }
 
-            // Disable BasicMovement components
-            BasicMovement[] basicMovements = playerObj.GetComponentsInChildren<BasicMovement>(true);
-            foreach (var bm in basicMovements)
-            {
+            foreach (var bm in playerObj.GetComponentsInChildren<BasicMovement>(true))
                 bm.enabled = false;
-            }
 
-            // Disable all MeshRenderers under this player (including children)
-            MeshRenderer[] meshRenderers = playerObj.GetComponentsInChildren<MeshRenderer>(true);
-            foreach (var mr in meshRenderers)
-            {
+            // Disable all mesh renderers
+            foreach (var mr in playerObj.GetComponentsInChildren<MeshRenderer>(true))
                 mr.enabled = false;
-            }
 
-            // Disable child named "MC_Hand_Model 1"
-            Transform handModel = playerObj.transform.Find("MC_Hand_Model 1");
-            if (handModel != null)
-            {
-                handModel.gameObject.SetActive(false);
-            }
-
-            // Disable child named "DefaultModel"
-            Transform defaultModel = playerObj.transform.Find("DefaultModel");
-            if (defaultModel != null)
-            {
-                defaultModel.gameObject.SetActive(false);
-            }
+            // Disable specific child models
+            DisableChildByName(playerObj.transform, "MC_Hand_Model 1");
+            DisableChildByName(playerObj.transform, "DefaultModel");
+            DisableChildByName(playerObj.transform, "HeavyModel");
         }
 
-        // Start coroutine to wait 2 seconds then load "Hub" scene
         StartCoroutine(LoadHubSceneAfterDelay(2f));
+    }
+
+    private void DisableChildByName(Transform parent, string childName)
+    {
+        Transform child = parent.Find(childName);
+        if (child != null)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator LoadHubSceneAfterDelay(float delay)

@@ -16555,6 +16555,7 @@ MonoBehaviour:
   projectileSpeed: 10
   objectToDestroy: {fileID: 8044653046116332223}
   fuelConsumption: 50
+  noFuelSound: {fileID: 8300000, guid: 30b92590c022d8948abd4e2d406b2f0d, type: 3}
   objectToUntag: {fileID: 8044653046116332223}
 --- !u!1 &3899508695686753578
 GameObject:
@@ -19027,6 +19028,8 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   rotationOffset: {x: 0, y: 0, z: 0}
   fuelRate: 1
+  noFuelSound: {fileID: 8300000, guid: 30b92590c022d8948abd4e2d406b2f0d, type: 3}
+  flameLoopSound: {fileID: 8300000, guid: 58e473e077d690440802e52e1c72c5af, type: 3}
 --- !u!1 &7801175903941963704
 GameObject:
   m_ObjectHideFlags: 0
@@ -19425,6 +19428,9 @@ MonoBehaviour:
   initialBurningDamage: 1
   fire: {fileID: 4334036789229396384}
   smoke: {fileID: 0}
+  hitSound: {fileID: 8300000, guid: 25eb98c26c34153438aabfae098ec803, type: 3}
+  objectToSpawnOnDeath: {fileID: 2967193555648527294, guid: eeb18a19ee4dd6f428ef317291c5ee21, type: 3}
+  deathSound: {fileID: 8300000, guid: 96c68ecf2bca5684c8de0722efe6846c, type: 3}
 --- !u!195 &1530726404697536308
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -20246,6 +20252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectA: {fileID: 7705022917589542152}
   objectB: {fileID: 3723968762586675538}
+  switchSound: {fileID: 8300000, guid: dd10b8c1b8aaae14082b279986fd8850, type: 3}
+  pitchMin: 0.95
+  pitchMax: 1.05
 --- !u!114 &424244900239838802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20270,6 +20279,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
+  footstepClip: {fileID: 8300000, guid: 84c1f5e4a5a2b8d4bb42ef4e0b6e6b27, type: 3}
+  footstepInterval: 0.5
+  pitchMin: 0.9
+  pitchMax: 1.1
 --- !u!54 &4518205836648125713
 Rigidbody:
   m_ObjectHideFlags: 0

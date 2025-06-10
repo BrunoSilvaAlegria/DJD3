@@ -112,6 +112,13 @@ public class HeavyCombat : MonoBehaviour
     {
         int layer = collision.gameObject.layer;
 
+        // Destroy Breakable objects during heavy run
+        if (heavyRun && collision.CompareTag("Breakable"))
+        {
+            Destroy(collision.gameObject);
+            return;
+        }
+
         if (layer == LayerMask.NameToLayer("Robot") && heavyRun && !isPining)
         {
             pinnedRobot = collision;
@@ -132,7 +139,7 @@ public class HeavyCombat : MonoBehaviour
 
     void Pin()
     {
-        Debug.Log("Robot Pined");
+        Debug.Log("Robot Pinned");
 
         if (pinnedRobot != null)
         {
