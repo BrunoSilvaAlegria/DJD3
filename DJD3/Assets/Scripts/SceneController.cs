@@ -10,14 +10,5 @@ public class SceneController : MonoBehaviour
             // Reload the current scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            // Quit the application
-            Application.Quit();
-
-            // Log for editor testing
-            Debug.Log("Quit requested (only works in builds)");
-        }
     }
 }
