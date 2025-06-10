@@ -32,6 +32,12 @@ public class RobotStatus : MonoBehaviour
     [SerializeField] private AudioClip hitSound;
     private AudioSource audioSource;
 
+    [Header("Death Settings")]
+    [SerializeField] private GameObject objectToSpawnOnDeath;
+    [SerializeField] private AudioClip deathSound;
+
+    private bool isDead = false;
+
     void Start()
     {
         fire.SetActive(false);
@@ -64,9 +70,13 @@ public class RobotStatus : MonoBehaviour
             return;
         }
 
+        if (isDead)
+        {
+            return;
+        }
+
         lastHitTime = Time.time;
 
-        // Play hit sound
         PlayHitSound();
 
         if (!fire.activeSelf)
@@ -79,7 +89,21 @@ public class RobotStatus : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            isDead = true;
+
             Debug.Log("Robot killed");
+
+            if (objectToSpawnOnDeath != null)
+            {
+                GameObject spawnedObject = Instantiate(objectToSpawnOnDeath, transform.position, Quaternion.Euler(-90f, 0f, 0f));
+                Destroy(spawnedObject, 2f); // Destroy after 2 seconds
+            }
+
+            if (deathSound != null)
+            {
+                AudioSource.PlayClipAtPoint(deathSound, transform.position);
+            }
+
             Destroy(objectToDestroy);
         }
     }

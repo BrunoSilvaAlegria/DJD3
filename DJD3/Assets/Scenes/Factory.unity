@@ -7562,6 +7562,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3157895082858426317, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
+      propertyPath: maxHealth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157895082858426317, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 96c68ecf2bca5684c8de0722efe6846c, type: 3}
+    - target: {fileID: 3157895082858426317, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
+      propertyPath: objectToSpawnOnDeath
+      value: 
+      objectReference: {fileID: 2967193555648527294, guid: eeb18a19ee4dd6f428ef317291c5ee21, type: 3}
     - target: {fileID: 5251356794251325509, guid: 1bf1bc0ea099f374babfbc3b5606c1cf, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -46729,6 +46741,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1216479247492922398, guid: 521e9f7593578854bbd0027bbab7852a, type: 3}
+      propertyPath: idleLoopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d66f5cc0927621b4c9ee903854b3cb80, type: 3}
+    - target: {fileID: 1216479247492922398, guid: 521e9f7593578854bbd0027bbab7852a, type: 3}
+      propertyPath: alertLoopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 10f0785ff0af0084eb8639f3abedace7, type: 3}
+    - target: {fileID: 1216479247492922398, guid: 521e9f7593578854bbd0027bbab7852a, type: 3}
+      propertyPath: detectedLoopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 10f0785ff0af0084eb8639f3abedace7, type: 3}
     - target: {fileID: 2428252006300784160, guid: 521e9f7593578854bbd0027bbab7852a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.43

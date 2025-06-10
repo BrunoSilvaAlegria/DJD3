@@ -19,7 +19,7 @@ public class CatchPlayerOnTrigger : MonoBehaviour
     private bool hasSpawned = false;
     private int obstacleCount = 0;
 
-    public float obstacleCooldown = 2f; // Cooldown time in seconds
+    public float obstacleCooldown = 2f;
     private float cooldownTimer = 0f;
     private bool inCooldown = false;
 
@@ -28,6 +28,11 @@ public class CatchPlayerOnTrigger : MonoBehaviour
 
     private GameObject detectedTarget;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip idleLoopSound;
+    [SerializeField] private AudioClip detectedLoopSound;
+    private AudioSource audioSource;
+
     private void Start()
     {
         if (caughtMaterial == null)
@@ -35,6 +40,26 @@ public class CatchPlayerOnTrigger : MonoBehaviour
 
         if (animatorObject1 == null || animatorObject2 == null)
             Debug.LogWarning("One or both Animator references are missing.");
+
+        // Setup Audio
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.loop = true;
+        audioSource.playOnAwake = false;
+
+        // 3D Spatial Sound Settings
+        audioSource.spatialBlend = 1f;
+        audioSource.minDistance = 5f;
+        audioSource.maxDistance = 20f;
+        audioSource.rolloffMode = AudioRolloffMode.Linear;
+
+        if (idleLoopSound != null)
+        {
+            audioSource.clip = idleLoopSound;
+            audioSource.Play();
+        }
     }
 
     private void Update()
@@ -57,7 +82,7 @@ public class CatchPlayerOnTrigger : MonoBehaviour
             obstacleCount++;
             Debug.Log($"Touched obstacle: {other.name} | Total obstacles: {obstacleCount}");
 
-            // Cancel cooldown if already running
+            // Reset cooldown if already running
             inCooldown = true;
             cooldownTimer = obstacleCooldown;
         }
@@ -76,6 +101,14 @@ public class CatchPlayerOnTrigger : MonoBehaviour
                 SpawnObjects();
                 hasSpawned = true;
             }
+
+            // Switch to detected loop sound
+            if (detectedLoopSound != null && audioSource.clip != detectedLoopSound)
+            {
+                audioSource.Stop();
+                audioSource.clip = detectedLoopSound;
+                audioSource.Play();
+            }
         }
     }
 
@@ -86,13 +119,10 @@ public class CatchPlayerOnTrigger : MonoBehaviour
             obstacleCount = Mathf.Max(0, obstacleCount - 1);
             Debug.Log($"Obstacle left: {other.name} | Remaining obstacles: {obstacleCount}");
 
-            // If no more obstacles, start cooldown
-            if (obstacleCount == 0)
-            {
-                inCooldown = true;
-                cooldownTimer = obstacleCooldown;
-                Debug.Log($"All obstacles cleared. Cooldown started: {obstacleCooldown}s");
-            }
+            // Start cooldown regardless of how many obstacles remain
+            inCooldown = true;
+            cooldownTimer = obstacleCooldown;
+            Debug.Log($"Cooldown started for {obstacleCooldown} seconds.");
         }
     }
 

@@ -1040,6 +1040,8 @@ MonoBehaviour:
   fire: {fileID: 6402097179190988460}
   smoke: {fileID: 3816717473333489019}
   hitSound: {fileID: 8300000, guid: 3794700aa62ec1d4e87e347beb25c8d6, type: 3}
+  objectToSpawnOnDeath: {fileID: 2967193555648527294, guid: eeb18a19ee4dd6f428ef317291c5ee21, type: 3}
+  deathSound: {fileID: 8300000, guid: 96c68ecf2bca5684c8de0722efe6846c, type: 3}
 --- !u!195 &3017157158175547372
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3867,6 +3869,7 @@ MonoBehaviour:
   rotationOffset: {x: 0, y: 0, z: 0}
   fuelRate: 1
   noFuelSound: {fileID: 0}
+  flameLoopSound: {fileID: 0}
 --- !u!1 &3471066590169031357
 GameObject:
   m_ObjectHideFlags: 0
